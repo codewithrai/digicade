@@ -12,6 +12,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.BatchSize;
 
@@ -88,6 +90,18 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
     )
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();
+
+    //"gameScores", "highScores", "gameLevels", "gameBadges",
+    @JsonIgnoreProperties(
+        value = {
+            "user", "transactions", "playerCouponRewards", "playerNftRewards", "digiUser",
+        },
+        allowSetters = true
+    )
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "id")
+    private Player player;
 
     public Long getId() {
         return id;
@@ -192,6 +206,14 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
     @Override

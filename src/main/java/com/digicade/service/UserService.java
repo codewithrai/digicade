@@ -2,8 +2,10 @@ package com.digicade.service;
 
 import com.digicade.config.Constants;
 import com.digicade.domain.Authority;
+import com.digicade.domain.Player;
 import com.digicade.domain.User;
 import com.digicade.repository.AuthorityRepository;
+import com.digicade.repository.PlayerRepository;
 import com.digicade.repository.UserRepository;
 import com.digicade.security.AuthoritiesConstants;
 import com.digicade.security.SecurityUtils;
@@ -15,6 +17,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,6 +37,8 @@ public class UserService {
     private final Logger log = LoggerFactory.getLogger(UserService.class);
 
     private final UserRepository userRepository;
+    @Autowired
+    private PlayerRepository playerRepository;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -123,12 +128,17 @@ public class UserService {
         newUser.setImageUrl(userDTO.getImageUrl());
         newUser.setLangKey(userDTO.getLangKey());
         // new user is not active
-        newUser.setActivated(false);
+        newUser.setActivated(true);
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         Set<Authority> authorities = new HashSet<>();
         authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
         newUser.setAuthorities(authorities);
+
+        Player player = new Player();
+        Player savedPlayer = playerRepository.save(player);
+        newUser.setPlayer(savedPlayer);
+
         userRepository.save(newUser);
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);

@@ -1,0 +1,54 @@
+{
+  "applications": "*",
+  "changelogDate": "20221221095512",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "digi_user",
+  "fields": [
+    {
+      "fieldName": "firstName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "userName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dob",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "age",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "promoCode",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "DigiUser",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "id": true,
+      "otherEntityName": "player",
+      "otherEntityRelationshipName": "digiUser",
+      "ownerSide": true,
+      "relationshipName": "player",
+      "relationshipType": "one-to-one",
+      "useJPADerivedIdentifier": true
+    }
+  ],
+  "service": "serviceImpl"
+}
