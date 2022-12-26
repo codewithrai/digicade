@@ -1,7 +1,11 @@
 package com.digicade.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.CreationTimestamp;
+
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Date;
 import javax.persistence.*;
 
 /**
@@ -25,6 +29,8 @@ public class GameLevel implements Serializable {
 
     @Column(name = "score")
     private Integer score;
+
+    private Timestamp createdAt;
 
     @ManyToOne
     @JsonIgnoreProperties(
@@ -78,6 +84,14 @@ public class GameLevel implements Serializable {
 
     public void setScore(Integer score) {
         this.score = score;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
 
     public Player getPlayer() {

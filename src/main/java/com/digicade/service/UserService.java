@@ -1,20 +1,21 @@
 package com.digicade.service;
 
 import com.digicade.config.Constants;
-import com.digicade.domain.Authority;
-import com.digicade.domain.Player;
-import com.digicade.domain.User;
-import com.digicade.repository.AuthorityRepository;
-import com.digicade.repository.PlayerRepository;
-import com.digicade.repository.UserRepository;
+import com.digicade.domain.*;
+import com.digicade.repository.*;
 import com.digicade.security.AuthoritiesConstants;
 import com.digicade.security.SecurityUtils;
-import com.digicade.service.dto.AdminUserDTO;
-import com.digicade.service.dto.UserDTO;
+import com.digicade.service.dto.*;
+
+import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import com.digicade.service.mapper.GameLevelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,12 +40,20 @@ public class UserService {
     private final UserRepository userRepository;
     @Autowired
     private PlayerRepository playerRepository;
+    @Autowired
+    private GameLevelRepository gameLevelRepository;
+    @Autowired
+    private GameLevelMapper gameLevelMapper;
 
     private final PasswordEncoder passwordEncoder;
 
     private final AuthorityRepository authorityRepository;
 
     private final CacheManager cacheManager;
+    @Autowired
+    private GameBadgeRepository gameBadgeRepository;
+    @Autowired
+    private GameScoreRepository gameScoreRepository;
 
     public UserService(
         UserRepository userRepository,
@@ -136,6 +145,10 @@ public class UserService {
         newUser.setAuthorities(authorities);
 
         Player player = new Player();
+        player.setGamePlayCredits(0);
+        player.setTix(0);
+        player.setComp(0);
+        player.setLevel(0);
         Player savedPlayer = playerRepository.save(player);
         newUser.setPlayer(savedPlayer);
 
@@ -284,6 +297,52 @@ public class UserService {
     @Transactional(readOnly = true)
     public Page<AdminUserDTO> getAllManagedUsers(Pageable pageable) {
         return userRepository.findAll(pageable).map(AdminUserDTO::new);
+    }
+
+    public User getUserById(Long id) {
+        Optional<User> optional = userRepository.findById(id);
+
+        if (optional.isPresent()) {
+            return optional.get();
+        }
+
+        return null;
+    }
+
+    public UserProfileDTO getUserProfile(Long id) {
+        Optional<User> optional = userRepository.findById(id);
+
+        if (!optional.isPresent()) {
+            return null;
+        }
+
+        User user = optional.get();
+
+        UserProfileDTO profile = new UserProfileDTO();
+
+        profile.setFirstName(user.getFirstName());
+        profile.setLastName(user.getLastName());
+        profile.setUsername(user.getLogin());
+        profile.setEmail(user.getEmail());
+        //profile.setPhoneNumber(null);
+        //profile.setGender();
+        profile.setImageUrl(user.getImageUrl());
+
+//        Player player = user.getDigiUser().getPlayer();
+        Player player = user.getPlayer();
+
+        //profile.setXp();
+        profile.setTix(player.getTix());
+        profile.setComp(player.getComp());
+        profile.setCredit(player.getGamePlayCredits());
+
+        Long playerId = player.getId();
+
+        Set<GameBadge> badges = gameBadgeRepository.findGameBadgeByPlayerId(playerId);
+
+        profile.setGameBadges(badges);
+
+        return profile;
     }
 
     @Transactional(readOnly = true)

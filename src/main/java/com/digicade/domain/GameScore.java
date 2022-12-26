@@ -10,6 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "game_score")
+@JsonIgnoreProperties(value = { "player" })
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class GameScore implements Serializable {
 

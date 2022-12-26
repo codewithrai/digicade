@@ -1,8 +1,9 @@
 package com.digicade.controller;
 
 import com.digicade.domain.User;
-import com.digicade.repository.UserRepository;
-import com.digicade.web.rest.UserResource;
+import com.digicade.service.UserService;
+import com.digicade.service.dto.LeaderBoard;
+import com.digicade.service.dto.UserProfileDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,22 +22,23 @@ public class UserController {
 
     private final Logger log = LoggerFactory.getLogger(UserController.class);
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
-    @GetMapping("/user/{id}")
-    public ResponseEntity<User> findUserById(@PathVariable Long id) {
+    @GetMapping("/users/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
         log.debug("REST request to get User by id: {}", id);
-        Optional<User> optional = userRepository.findById(id);
-
-        if (!optional.isPresent()) {
-            return null;
-        }
-
-        User user = optional.get();
+        User user = userService.getUserById(id);
 
         log.debug("REST request to get User by id: {}", user);
 
         return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @GetMapping("/user-profile/{id}")
+    public ResponseEntity<UserProfileDTO> getUserProfile(@PathVariable Long id) {
+        UserProfileDTO userProfile = userService.getUserProfile(id);
+
+        return new ResponseEntity<>(userProfile, HttpStatus.OK);
     }
 
 }

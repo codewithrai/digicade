@@ -4,6 +4,8 @@ import com.digicade.domain.User;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
+
+import com.digicade.service.dto.UserDTO;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -33,4 +35,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findOneWithAuthoritiesByEmailIgnoreCase(String email);
 
     Page<User> findAllByIdNotNullAndActivatedIsTrue(Pageable pageable);
+
 }
