@@ -14,12 +14,6 @@ public class GameLevelController {
     @Autowired
     private GameLevelService gameLevelService;
 
-    @PostMapping("/game-level")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void saveGameLevel(@RequestBody GameLevelDTO gameLevelDTO) {
-        GameLevelDTO save = gameLevelService.save(gameLevelDTO);
-    }
-
     @GetMapping("/leader-board/{id}/{filter}")
     public ResponseEntity<LeaderBoard> getLeaderBoardByGameId(@PathVariable Long id, @PathVariable String filter) {
         LeaderBoard leaderBoard = gameLevelService.getLeaderBoardByGameId(id, filter);

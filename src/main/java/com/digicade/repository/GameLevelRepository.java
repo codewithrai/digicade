@@ -18,5 +18,5 @@ import java.util.Optional;
 public interface GameLevelRepository extends JpaRepository<GameLevel, Long> {
     Optional<List<GameLevel>> findByGameIdOrderByScoreDesc(Long id);
     Optional<List<GameLevel>> findByGameIdAndCreatedAtBetweenOrderByScoreDesc(Long id, Timestamp start, Timestamp end);
-    Optional<GameLevel> findByPlayerId(Long id);
+    Optional<GameLevel> findByGameIdAndPlayerId(Long gameId, Long playerId);
 }

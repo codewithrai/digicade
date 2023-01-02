@@ -1,7 +1,13 @@
 package com.digicade.service;
 
+import com.digicade.domain.GameScore;
+import com.digicade.domain.HighScore;
 import com.digicade.service.dto.HighScoreDTO;
+
+import java.util.List;
 import java.util.Optional;
+
+import com.digicade.service.dto.UserGameHighScoresDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -55,4 +61,6 @@ public interface HighScoreService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    List<UserGameHighScoresDTO> getUserGameHighestScoresByPlayerId(Long playerId);
 }

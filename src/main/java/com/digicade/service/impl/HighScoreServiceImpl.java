@@ -1,10 +1,15 @@
 package com.digicade.service.impl;
 
+import com.digicade.domain.GameScore;
 import com.digicade.domain.HighScore;
 import com.digicade.repository.HighScoreRepository;
 import com.digicade.service.HighScoreService;
 import com.digicade.service.dto.HighScoreDTO;
+import com.digicade.service.dto.UserGameHighScoresDTO;
 import com.digicade.service.mapper.HighScoreMapper;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -80,5 +85,21 @@ public class HighScoreServiceImpl implements HighScoreService {
     public void delete(Long id) {
         log.debug("Request to delete HighScore : {}", id);
         highScoreRepository.deleteById(id);
+    }
+
+    @Override
+    public List<UserGameHighScoresDTO> getUserGameHighestScoresByPlayerId(Long playerId) {
+        List<HighScore> all = highScoreRepository.findByPlayerId(playerId);
+
+        List<UserGameHighScoresDTO> userGameHighScores = new ArrayList<>();
+        for (HighScore highScore : all) {
+            Long id = highScore.getId();
+            String name = highScore.getGame().getName();
+            Integer highestScore = highScore.getHighestScore();
+            UserGameHighScoresDTO highScoresDTO = new UserGameHighScoresDTO(id, name, highestScore);
+            userGameHighScores.add(highScoresDTO);
+        }
+
+        return userGameHighScores;
     }
 }

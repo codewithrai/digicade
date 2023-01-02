@@ -28,6 +28,10 @@ public class GameScore implements Serializable {
     @Column(name = "date")
     private LocalDate date;
 
+    private Long won;
+
+    private Long lost;
+
     @ManyToOne
     @JsonIgnoreProperties(value = { "gameScores", "highScores", "gameBadges", "gameLevels" }, allowSetters = true)
     private Game game;
@@ -76,6 +80,22 @@ public class GameScore implements Serializable {
     public GameScore date(LocalDate date) {
         this.setDate(date);
         return this;
+    }
+
+    public Long getWon() {
+        return won;
+    }
+
+    public void setWon(Long won) {
+        this.won = won;
+    }
+
+    public Long getLost() {
+        return lost;
+    }
+
+    public void setLost(Long lost) {
+        this.lost = lost;
     }
 
     public void setDate(LocalDate date) {

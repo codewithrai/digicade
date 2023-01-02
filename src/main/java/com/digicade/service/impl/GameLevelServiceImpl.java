@@ -50,13 +50,15 @@ public class GameLevelServiceImpl implements GameLevelService {
         log.debug("Request to save GameLevel : {}", gameLevelDTO);
 
         Optional<GameLevel> optionalGameLevel = gameLevelRepository.
-            findByPlayerId(gameLevelDTO.getPlayer().getId());
+            findByGameIdAndPlayerId(gameLevelDTO.getGame().getId(), gameLevelDTO.getPlayer().getId());
 
         if (optionalGameLevel.isPresent()) {
             GameLevel gameLevel = optionalGameLevel.get();
             if (gameLevelDTO.getScore() > gameLevel.getScore()) {
                 log.debug("Request to save GameLevel GameScore is Higher");
                 gameLevelDTO.setId(gameLevel.getId());
+            } else {
+                return null;
             }
         }
 
