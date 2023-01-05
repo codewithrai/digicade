@@ -23,6 +23,16 @@ import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ErrorComponent } from './layouts/error/error.component';
+import { AppComponent } from './app/app.component';
+import { HeaderComponent } from './layouts/header/header.component';
+import { AppFooterComponent } from './app-footer/app-footer.component';
+import { AppLoginComponent } from './app-login/app-login.component';
+import { AppRegisterComponent } from './app-register/app-register.component';
+import { AppCarouselComponent } from './app-carousel/app-carousel.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 
 @NgModule({
   imports: [
@@ -35,14 +45,49 @@ import { ErrorComponent } from './layouts/error/error.component';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
     HttpClientModule,
     NgxWebstorageModule.forRoot({ prefix: 'jhi', separator: '-', caseSensitive: true }),
+    BrowserAnimationsModule,
+    CarouselModule,
+    SocialLoginModule,
   ],
   providers: [
     Title,
     { provide: LOCALE_ID, useValue: 'en' },
     { provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter },
     httpInterceptorProviders,
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider('773632708179-psoan60e5kvdiiv5k29gj42u9hf29l18.apps.googleusercontent.com'),
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('501032318451653'),
+          },
+        ],
+        onError: err => {
+          console.error(err);
+        },
+      } as SocialAuthServiceConfig,
+    },
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],
+  declarations: [
+    MainComponent,
+    NavbarComponent,
+    ErrorComponent,
+    PageRibbonComponent,
+    FooterComponent,
+    AppComponent,
+    HeaderComponent,
+    AppFooterComponent,
+    AppLoginComponent,
+    AppRegisterComponent,
+    AppCarouselComponent,
+    AdminPanelComponent,
+  ],
   bootstrap: [MainComponent],
 })
 export class AppModule {

@@ -9,5 +9,6 @@ import { PlayerRoutingModule } from './route/player-routing.module';
 @NgModule({
   imports: [SharedModule, PlayerRoutingModule],
   declarations: [PlayerComponent, PlayerDetailComponent, PlayerUpdateComponent, PlayerDeleteDialogComponent],
+  exports: [PlayerComponent],
 })
 export class PlayerModule {}

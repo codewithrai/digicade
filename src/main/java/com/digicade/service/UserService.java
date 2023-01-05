@@ -6,7 +6,7 @@ import com.digicade.repository.*;
 import com.digicade.security.AuthoritiesConstants;
 import com.digicade.security.SecurityUtils;
 import com.digicade.service.dto.*;
-
+import com.digicade.service.mapper.GameLevelMapper;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -14,8 +14,6 @@ import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
-
-import com.digicade.service.mapper.GameLevelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +36,13 @@ public class UserService {
     private final Logger log = LoggerFactory.getLogger(UserService.class);
 
     private final UserRepository userRepository;
+
     @Autowired
     private PlayerRepository playerRepository;
+
     @Autowired
     private GameLevelRepository gameLevelRepository;
+
     @Autowired
     private GameLevelMapper gameLevelMapper;
 
@@ -50,8 +51,10 @@ public class UserService {
     private final AuthorityRepository authorityRepository;
 
     private final CacheManager cacheManager;
+
     @Autowired
     private GameBadgeRepository gameBadgeRepository;
+
     @Autowired
     private GameScoreRepository gameScoreRepository;
 
@@ -149,6 +152,7 @@ public class UserService {
         player.setTix(0);
         player.setComp(0);
         player.setLevel(0);
+        player.setXp(0);
         Player savedPlayer = playerRepository.save(player);
         newUser.setPlayer(savedPlayer);
 
@@ -312,10 +316,6 @@ public class UserService {
     public UserProfileDTO getUserProfile(Long id) {
         Optional<User> optional = userRepository.findById(id);
 
-        if (!optional.isPresent()) {
-            return null;
-        }
-
         User user = optional.get();
 
         UserProfileDTO profile = new UserProfileDTO();
@@ -328,10 +328,10 @@ public class UserService {
         //profile.setGender();
         profile.setImageUrl(user.getImageUrl());
 
-//        Player player = user.getDigiUser().getPlayer();
         Player player = user.getPlayer();
 
-        //profile.setXp();
+        profile.setLevel(player.getLevel());
+        profile.setXp(player.getXp());
         profile.setTix(player.getTix());
         profile.setComp(player.getComp());
         profile.setCredit(player.getGamePlayCredits());

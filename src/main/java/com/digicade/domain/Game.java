@@ -22,7 +22,11 @@ public class Game implements Serializable {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "title")
+    private String title;
 
     @Column(name = "url")
     private String url;
@@ -67,6 +71,14 @@ public class Game implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getUrl() {

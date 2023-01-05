@@ -1,11 +1,11 @@
-id;name;url;logo_url
-1;Black Jack;https://orie.biz;invoice reboot Creative
-2;Black Jack;http://pinkie.org;streamline
-3;Match 3;http://price.biz;user-facing
-4;Match 3;http://gwendolyn.com;Pennsylvania Utah Sausages
-5;Soccer;https://jettie.net;Designer Niue even-keeled
-6;Soccer;https://rylan.org;Lock sensor
-7;Slot;https://jeanie.org;bypass Shoes Rapids
-8;Slot;https://kaia.name;Borders Paradigm synergies
-9;Black Jack;http://abigail.name;Investor
-10;Match 3;https://nolan.org;circuit Networked matrix
+id;name;title;url;logo_url
+1;Black Jack;Game Title;https://orie.biz;invoice reboot Creative
+2;Black Jack;Game Title;http://pinkie.org;streamline
+3;Match 3;Game Title;http://price.biz;user-facing
+4;Match 3;Game Title;http://gwendolyn.com;Pennsylvania Utah Sausages
+5;Soccer;Game Title;https://jettie.net;Designer Niue even-keeled
+6;Soccer;Game Title;https://rylan.org;Lock sensor
+7;Slot;Game Title;https://jeanie.org;bypass Shoes Rapids
+8;Slot;Game Title;https://kaia.name;Borders Paradigm synergies
+9;Black Jack;Game Title;http://abigail.name;Investor
+10;Match 3;Game Title;https://nolan.org;circuit Networked matrix

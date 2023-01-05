@@ -34,6 +34,9 @@ public class Player implements Serializable {
     @Column(name = "level")
     private Integer level;
 
+    @Column(name = "xp")
+    private Integer xp;
+
     @Column(name = "wallet_address")
     private String walletAddress;
 
@@ -138,6 +141,14 @@ public class Player implements Serializable {
 
     public void setLevel(Integer level) {
         this.level = level;
+    }
+
+    public Integer getXp() {
+        return xp;
+    }
+
+    public void setXp(Integer xp) {
+        this.xp = xp;
     }
 
     public String getWalletAddress() {

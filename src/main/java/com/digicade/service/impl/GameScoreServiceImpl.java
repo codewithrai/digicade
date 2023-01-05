@@ -10,7 +10,6 @@ import com.digicade.service.dto.GameLevelDTO;
 import com.digicade.service.dto.GameScoreDTO;
 import com.digicade.service.dto.UserGameStatsDTO;
 import com.digicade.service.mapper.GameScoreMapper;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +34,10 @@ public class GameScoreServiceImpl implements GameScoreService {
     private final GameScoreRepository gameScoreRepository;
 
     private final GameScoreMapper gameScoreMapper;
+
     @Autowired
     private HighScoreRepository highScoreRepository;
+
     @Autowired
     private GameLevelService gameLevelService;
 
@@ -50,9 +51,10 @@ public class GameScoreServiceImpl implements GameScoreService {
         log.debug("Request to save GameScore : {}", gameScoreDTO);
         GameScore gameScore = gameScoreMapper.toEntity(gameScoreDTO);
 
-        Optional<HighScore> highScoreOptional = highScoreRepository.
-            findByGameIdAndPlayerId(gameScoreDTO.getGame().getId(), gameScoreDTO.getPlayer().getId());
-
+        Optional<HighScore> highScoreOptional = highScoreRepository.findByGameIdAndPlayerId(
+            gameScoreDTO.getGame().getId(),
+            gameScoreDTO.getPlayer().getId()
+        );
 
         // save high score
         if (highScoreOptional.isPresent()) {
@@ -68,14 +70,6 @@ public class GameScoreServiceImpl implements GameScoreService {
             highScore.setHighestScore(gameScore.getScore());
             HighScore save = highScoreRepository.save(highScore);
         }
-
-        // save game level
-        GameLevelDTO gameLevelDTO = new GameLevelDTO();
-        gameLevelDTO.setGame(gameScoreDTO.getGame());
-        gameLevelDTO.setPlayer(gameScoreDTO.getPlayer());
-        gameLevelDTO.setScore(gameScore.getScore());
-        gameLevelService.save(gameLevelDTO);
-
 
         gameScore.setDate(LocalDate.now());
 

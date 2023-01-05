@@ -1,19 +1,20 @@
 package com.digicade.service.dto;
 
 public class UserGameStatsDTO {
+
     private String name;
-    private Integer score;
     private Long won;
     private Long lost;
 
-    public UserGameStatsDTO() {
-    }
+    private Integer rank;
 
-    public UserGameStatsDTO(String name, Integer score, Long won, Long lost) {
+    public UserGameStatsDTO() {}
+
+    public UserGameStatsDTO(String name, Long won, Long lost, Integer rank) {
         this.name = name;
-        this.score = score;
         this.won = won;
         this.lost = lost;
+        this.rank = rank;
     }
 
     public String getName() {
@@ -22,14 +23,6 @@ public class UserGameStatsDTO {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Integer getScore() {
-        return score;
-    }
-
-    public void setScore(Integer score) {
-        this.score = score;
     }
 
     public Long getWon() {
@@ -46,5 +39,13 @@ public class UserGameStatsDTO {
 
     public void setLost(Long lost) {
         this.lost = lost;
+    }
+
+    public Integer getRank() {
+        return rank;
+    }
+
+    public void setRank(Integer rank) {
+        this.rank = rank;
     }
 }

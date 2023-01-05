@@ -5,11 +5,9 @@ import com.digicade.domain.Player;
 import com.digicade.repository.GameLevelRepository;
 import com.digicade.repository.PlayerRepository;
 import com.digicade.service.GameLevelService;
-import com.digicade.service.dto.GameLevelDTO;
-import com.digicade.service.dto.LeaderBoard;
-import com.digicade.service.dto.LeaderBoardDTO;
+import com.digicade.service.PlayerService;
+import com.digicade.service.dto.*;
 import com.digicade.service.mapper.GameLevelMapper;
-
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -40,6 +38,9 @@ public class GameLevelServiceImpl implements GameLevelService {
     @Autowired
     private PlayerRepository playerRepository;
 
+    @Autowired
+    private PlayerService playerService;
+
     public GameLevelServiceImpl(GameLevelRepository gameLevelRepository, GameLevelMapper gameLevelMapper) {
         this.gameLevelRepository = gameLevelRepository;
         this.gameLevelMapper = gameLevelMapper;
@@ -49,25 +50,52 @@ public class GameLevelServiceImpl implements GameLevelService {
     public GameLevelDTO save(GameLevelDTO gameLevelDTO) {
         log.debug("Request to save GameLevel : {}", gameLevelDTO);
 
-        Optional<GameLevel> optionalGameLevel = gameLevelRepository.
-            findByGameIdAndPlayerId(gameLevelDTO.getGame().getId(), gameLevelDTO.getPlayer().getId());
+        Optional<GameLevel> optionalGameLevel = gameLevelRepository.findByGameIdAndPlayerId(
+            gameLevelDTO.getGame().getId(),
+            gameLevelDTO.getPlayer().getId()
+        );
 
         if (optionalGameLevel.isPresent()) {
             GameLevel gameLevel = optionalGameLevel.get();
-            if (gameLevelDTO.getScore() > gameLevel.getScore()) {
-                log.debug("Request to save GameLevel GameScore is Higher");
-                gameLevelDTO.setId(gameLevel.getId());
-            } else {
-                return null;
-            }
+            gameLevelDTO.setXp(gameLevelDTO.getXp() + gameLevel.getXp());
+            gameLevelDTO.setId(gameLevel.getId());
         }
+
+        setPlayerRank(gameLevelDTO);
 
         GameLevel gameLevel = gameLevelMapper.toEntity(gameLevelDTO);
 
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         gameLevel.setCreatedAt(timestamp);
         gameLevel = gameLevelRepository.save(gameLevel);
+
+        // update Global rank and xp in Player table
+        Optional<XPRankDTO> gameLevelOptional = gameLevelRepository.findXpAndRankByPlayerId(gameLevelDTO.getPlayer().getId());
+        if (gameLevelOptional.isPresent()) {
+            XPRankDTO xpRankDTO = gameLevelOptional.get();
+            PlayerDTO playerDTO = new PlayerDTO();
+            playerDTO.setId(gameLevelDTO.getPlayer().getId());
+            playerDTO.setLevel(xpRankDTO.getRank().intValue());
+            playerDTO.setXp(xpRankDTO.getXp().intValue());
+
+            playerService.partialUpdate(playerDTO);
+        }
+
         return gameLevelMapper.toDto(gameLevel);
+    }
+
+    private void setPlayerRank(GameLevelDTO gameLevelDTO) {
+        if (gameLevelDTO.getXp() >= 81) {
+            gameLevelDTO.setLevel(1);
+        } else if (gameLevelDTO.getXp() >= 61 && gameLevelDTO.getXp() <= 80) {
+            gameLevelDTO.setLevel(2);
+        } else if (gameLevelDTO.getXp() >= 41 && gameLevelDTO.getXp() <= 60) {
+            gameLevelDTO.setLevel(3);
+        } else if (gameLevelDTO.getXp() >= 21 && gameLevelDTO.getXp() <= 40) {
+            gameLevelDTO.setLevel(4);
+        } else {
+            gameLevelDTO.setLevel(5);
+        }
     }
 
     @Override
@@ -115,64 +143,96 @@ public class GameLevelServiceImpl implements GameLevelService {
 
     @Override
     public LeaderBoard getLeaderBoardByGameId(Long id, String filter) {
-        Optional<List<GameLevelDTO>> optionalList = null;
-
         if (filter.toUpperCase().equals("TODAY")) {
             Instant instant = Instant.now().minus(1, ChronoUnit.DAYS);
             Timestamp start = Timestamp.from(instant);
             Timestamp end = new Timestamp(System.currentTimeMillis());
-            optionalList = gameLevelRepository
-                .findByGameIdAndCreatedAtBetweenOrderByScoreDesc(id, start, end)
-                .map(gameLevelMapper::toDto);
+
+            Optional<List<LeaderBoardDTO>> leaderBoardDTOOptional = gameLevelRepository.findLeaderBoardByGameIdByGameIdWithDateRange(
+                id,
+                start,
+                end
+            );
+            if (!leaderBoardDTOOptional.isPresent()) {
+                return null;
+            }
+
+            List<LeaderBoardDTO> leaderBoardDTO = leaderBoardDTOOptional.get();
+
             log.debug("Date Start: {}", start);
             log.debug("Date End: {}", end);
+
+            return new LeaderBoard(leaderBoardDTO);
         } else if (filter.toUpperCase().equals("WEEK")) {
             Instant instant = Instant.now().minus(7, ChronoUnit.DAYS);
             Timestamp start = Timestamp.from(instant);
             Timestamp end = new Timestamp(System.currentTimeMillis());
-            optionalList = gameLevelRepository
-                .findByGameIdAndCreatedAtBetweenOrderByScoreDesc(id, start, end)
-                .map(gameLevelMapper::toDto);
+
+            Optional<List<LeaderBoardDTO>> leaderBoardDTOOptional = gameLevelRepository.findLeaderBoardByGameIdByGameIdWithDateRange(
+                id,
+                start,
+                end
+            );
+            if (!leaderBoardDTOOptional.isPresent()) {
+                return null;
+            }
+
+            List<LeaderBoardDTO> leaderBoardDTO = leaderBoardDTOOptional.get();
+
+            log.debug("Date Start: {}", start);
+            log.debug("Date End: {}", end);
+
+            return new LeaderBoard(leaderBoardDTO);
         } else if (filter.toUpperCase().equals("MONTH")) {
             Instant instant = Instant.now().minus(30, ChronoUnit.DAYS);
             Timestamp start = Timestamp.from(instant);
             Timestamp end = new Timestamp(System.currentTimeMillis());
-            optionalList = gameLevelRepository
-                .findByGameIdAndCreatedAtBetweenOrderByScoreDesc(id, start, end)
-                .map(gameLevelMapper::toDto);
+
+            Optional<List<LeaderBoardDTO>> leaderBoardDTOOptional = gameLevelRepository.findLeaderBoardByGameIdByGameIdWithDateRange(
+                id,
+                start,
+                end
+            );
+            if (!leaderBoardDTOOptional.isPresent()) {
+                return null;
+            }
+
+            List<LeaderBoardDTO> leaderBoardDTO = leaderBoardDTOOptional.get();
+
+            log.debug("Date Start: {}", start);
+            log.debug("Date End: {}", end);
+
+            return new LeaderBoard(leaderBoardDTO);
         } else if (filter.toUpperCase().equals("YEAR")) {
             Instant instant = Instant.now().minus(365, ChronoUnit.DAYS);
             Timestamp start = Timestamp.from(instant);
             Timestamp end = new Timestamp(System.currentTimeMillis());
-            optionalList = gameLevelRepository
-                .findByGameIdAndCreatedAtBetweenOrderByScoreDesc(id, start, end)
-                .map(gameLevelMapper::toDto);
-        } else if (filter.toUpperCase().equals("ALL")) {
-            optionalList = gameLevelRepository.findByGameIdOrderByScoreDesc(id).map(gameLevelMapper::toDto);
-        }
-        List<GameLevelDTO> gameLevels = optionalList.get();
-        log.debug("Request to get GameLevels: {}", gameLevels);
 
-        LeaderBoard leaderBoard = new LeaderBoard();
-        List<LeaderBoardDTO> leaderBoardDTOS = new ArrayList<>();
-        int rank = 1;
-        for (GameLevelDTO gameLevel : gameLevels) {
-            Long playerId = gameLevel.getPlayer().getId();
-            Optional<Player> playerOptional = playerRepository.findById(playerId);
-            if (!playerOptional.isPresent()) {
-                log.debug("Player not found for ID: {}", playerId);
+            Optional<List<LeaderBoardDTO>> leaderBoardDTOOptional = gameLevelRepository.findLeaderBoardByGameIdByGameIdWithDateRange(
+                id,
+                start,
+                end
+            );
+            if (!leaderBoardDTOOptional.isPresent()) {
                 return null;
             }
-            Player player = playerOptional.get();
-            Long userId = player.getUser().getId();
-            String firstName = player.getUser().getFirstName();
-            String lastName = player.getUser().getLastName();
-            leaderBoardDTOS.add(new LeaderBoardDTO(userId, firstName, lastName,
-                rank, gameLevel.getScore()));
-            rank++;
-        }
-        leaderBoard.setLeaderBoard(leaderBoardDTOS);
 
-        return leaderBoard;
+            List<LeaderBoardDTO> leaderBoardDTO = leaderBoardDTOOptional.get();
+
+            log.debug("Date Start: {}", start);
+            log.debug("Date End: {}", end);
+
+            return new LeaderBoard(leaderBoardDTO);
+        } else if (filter.toUpperCase().equals("ALL")) {
+            Optional<List<LeaderBoardDTO>> leaderBoardDTOOptional = gameLevelRepository.findLeaderBoardByGameId(id);
+            if (!leaderBoardDTOOptional.isPresent()) {
+                return null;
+            }
+
+            List<LeaderBoardDTO> leaderBoardDTO = leaderBoardDTOOptional.get();
+
+            return new LeaderBoard(leaderBoardDTO);
+        }
+        return null;
     }
 }
