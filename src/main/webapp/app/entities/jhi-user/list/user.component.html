@@ -5,7 +5,7 @@
   </div>
   <div class="player">
     <h2 id="page-heading" data-cy="PlayerHeading">
-      <span>Players</span>
+      <span>Users</span>
 
       <div class="d-flex justify-content-end">
         <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
@@ -17,10 +17,10 @@
           id="jh-create-entity"
           data-cy="entityCreateButton"
           class="btn btn-primary jh-create-entity create-player"
-          [routerLink]="['/player/new']"
+          [routerLink]="['/user/new']"
         >
           <fa-icon icon="plus"></fa-icon>
-          <span> Create a new Player </span>
+          <span> Create a new User </span>
         </button>
       </div>
     </h2>
@@ -29,11 +29,11 @@
 
     <jhi-alert></jhi-alert>
 
-    <div class="alert alert-warning" id="no-result" *ngIf="players?.length === 0">
-      <span>No Players found</span>
+    <div class="alert alert-warning" id="no-result" *ngIf="users?.length === 0">
+      <span>No Users found</span>
     </div>
 
-    <div class="table-responsive table-entities" id="entities" *ngIf="players && players.length > 0">
+    <div class="table-responsive table-entities" id="entities" *ngIf="users && users.length > 0">
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
           <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
@@ -43,39 +43,33 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="gamePlayCredits">
+            <th scope="col" jhiSortBy="login">
               <div class="d-flex">
-                <span>Game Play Credits</span>
+                <span>Login</span>
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="tix">
+            <th scope="col" jhiSortBy="firstName">
               <div class="d-flex">
-                <span>Tix</span>
+                <span>First Name</span>
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="comp">
+            <th scope="col" jhiSortBy="lastName">
               <div class="d-flex">
-                <span>Comp</span>
+                <span>Last Name</span>
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="level">
+            <th scope="col" jhiSortBy="email">
               <div class="d-flex">
-                <span>Level</span>
+                <span>Email</span>
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="xp">
+            <th scope="col" jhiSortBy="activated">
               <div class="d-flex">
-                <span>XP</span>
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
-            <th scope="col" jhiSortBy="walletAddress">
-              <div class="d-flex">
-                <span>Wallet Address</span>
+                <span>Activated</span>
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
@@ -83,21 +77,20 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let player of players; trackBy: trackId" data-cy="entityTable">
+          <tr *ngFor="let user of users; trackBy: trackId" data-cy="entityTable">
             <td>
-              <a [routerLink]="['/player', player.id, 'view']">{{ player.id }}</a>
+              <a [routerLink]="['/user', user.login, 'view']">{{ user.login }}</a>
             </td>
-            <td>{{ player.gamePlayCredits }}</td>
-            <td>{{ player.tix }}</td>
-            <td>{{ player.comp }}</td>
-            <td>{{ player.level }}</td>
-            <td>{{ player.xp }}</td>
-            <td>{{ player.walletAddress }}</td>
+            <td>{{ user.login }}</td>
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.activated }}</td>
             <td class="text-end">
               <div class="btn-group">
                 <button
                   type="submit"
-                  [routerLink]="['/player', player.id, 'view']"
+                  [routerLink]="['/user', user.login, 'view']"
                   class="btn btn-info btn-sm"
                   data-cy="entityDetailsButton"
                 >
@@ -107,7 +100,7 @@
 
                 <button
                   type="submit"
-                  [routerLink]="['/player', player.id, 'edit']"
+                  [routerLink]="['/user', user.login, 'edit']"
                   class="btn btn-primary btn-sm"
                   data-cy="entityEditButton"
                 >
@@ -115,7 +108,7 @@
                   <span class="d-none d-md-inline">Edit</span>
                 </button>
 
-                <button type="submit" (click)="delete(player)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <button type="submit" (click)="delete(user)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                   <fa-icon icon="times"></fa-icon>
                   <span class="d-none d-md-inline">Delete</span>
                 </button>
@@ -126,7 +119,7 @@
       </table>
     </div>
 
-    <div *ngIf="players && players.length > 0">
+    <div *ngIf="users && users.length > 0">
       <div class="d-flex justify-content-center">
         <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
       </div>

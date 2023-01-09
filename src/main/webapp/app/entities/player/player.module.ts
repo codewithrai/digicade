@@ -5,10 +5,16 @@ import { PlayerDetailComponent } from './detail/player-detail.component';
 import { PlayerUpdateComponent } from './update/player-update.component';
 import { PlayerDeleteDialogComponent } from './delete/player-delete-dialog.component';
 import { PlayerRoutingModule } from './route/player-routing.module';
+import { SidebarComponent } from '../../layouts/sidebar/sidebar.component';
 
 @NgModule({
   imports: [SharedModule, PlayerRoutingModule],
-  declarations: [PlayerComponent, PlayerDetailComponent, PlayerUpdateComponent, PlayerDeleteDialogComponent],
-  exports: [PlayerComponent],
+  declarations: [
+    // PlayerComponent,
+    // PlayerDetailComponent,
+    // PlayerUpdateComponent,
+    // PlayerDeleteDialogComponent,
+  ],
+  exports: [],
 })
 export class PlayerModule {}

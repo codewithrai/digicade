@@ -38,6 +38,10 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
         },
         {
           path: 'panel',
+          data: {
+            authorities: [Authority.ADMIN],
+          },
+          canActivate: [UserRouteAccessService],
           component: AdminPanelComponent,
         },
         {

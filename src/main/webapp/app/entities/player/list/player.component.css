@@ -1,0 +1,12 @@
+.player-main {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.sidebar {
+  width: 20%;
+}
+.player {
+  width: 79%;
+  padding: 20px;
+}

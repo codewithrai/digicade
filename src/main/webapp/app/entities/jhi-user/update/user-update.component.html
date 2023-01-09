@@ -7,7 +7,7 @@
     <div class="d-flex justify-content-center">
       <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-          <h2 id="jhi-player-heading" data-cy="PlayerCreateUpdateHeading">Create or edit a Player</h2>
+          <h2 id="jhi-player-heading" data-cy="PlayerCreateUpdateHeading">Create or edit a User</h2>
 
           <div>
             <jhi-alert-error></jhi-alert-error>
@@ -18,46 +18,46 @@
             </div>
 
             <div class="row mb-3">
-              <label class="form-label" for="field_gamePlayCredits">Game Play Credits</label>
+              <label class="form-label" for="field_gamePlayCredits">Login</label>
+              <input type="text" class="form-control" name="login" id="field_gamePlayCredits" data-cy="login" formControlName="login" />
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label" for="field_tix">First Name</label>
+              <input type="text" class="form-control" name="firstName" id="field_tix" data-cy="firstName" formControlName="firstName" />
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label" for="field_comp">Last Name</label>
+              <input type="text" class="form-control" name="lastName" id="field_comp" data-cy="lastName" formControlName="lastName" />
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label" for="field_level">Email</label>
+              <input type="text" class="form-control" name="email" id="field_level" data-cy="email" formControlName="email" />
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label" for="field_walletAddress">Image Url</label>
               <input
-                type="number"
+                type="file"
                 class="form-control"
-                name="gamePlayCredits"
-                id="field_gamePlayCredits"
-                data-cy="gamePlayCredits"
-                formControlName="gamePlayCredits"
+                name="imageUrl"
+                id="field_walletAddress"
+                data-cy="imageUrl"
+                formControlName="imageUrl"
               />
             </div>
 
             <div class="row mb-3">
-              <label class="form-label" for="field_tix">Tix</label>
-              <input type="number" class="form-control" name="tix" id="field_tix" data-cy="tix" formControlName="tix" />
-            </div>
-
-            <div class="row mb-3">
-              <label class="form-label" for="field_comp">Comp</label>
-              <input type="number" class="form-control" name="comp" id="field_comp" data-cy="comp" formControlName="comp" />
-            </div>
-
-            <div class="row mb-3">
-              <label class="form-label" for="field_level">Level</label>
-              <input type="number" class="form-control" name="level" id="field_level" data-cy="level" formControlName="level" />
-            </div>
-
-            <div class="row mb-3">
-              <label class="form-label" for="field_level">XP</label>
-              <input type="number" class="form-control" name="xp" id="field_xp" data-cy="level" formControlName="xp" />
-            </div>
-
-            <div class="row mb-3">
-              <label class="form-label" for="field_walletAddress">Wallet Address</label>
+              <label class="form-label" for="field_walletAddress">Activated</label>
               <input
                 type="text"
                 class="form-control"
-                name="walletAddress"
-                id="field_walletAddress"
-                data-cy="walletAddress"
-                formControlName="walletAddress"
+                name="activated"
+                id="field_walletAddress2"
+                data-cy="activated"
+                formControlName="activated"
               />
             </div>
           </div>

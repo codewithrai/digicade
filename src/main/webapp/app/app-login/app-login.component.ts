@@ -56,7 +56,7 @@ export class AppLoginComponent implements OnInit {
         this.authenticationError = false;
         if (!this.router.getCurrentNavigation()) {
           // There were no routing during login (eg from navigationToStoredUrl)
-          this.router.navigate(['/panel']);
+          this.router.navigate(['/user']);
         }
       },
       error: () => (this.authenticationError = true),
@@ -93,7 +93,7 @@ export class AppLoginComponent implements OnInit {
               this.authenticationError = false;
               if (!this.router.getCurrentNavigation()) {
                 // There were no routing during login (eg from navigationToStoredUrl)
-                this.router.navigate(['panel']);
+                this.router.navigate(['/user']);
               }
             },
             error: () => (this.authenticationError = true),
@@ -120,7 +120,7 @@ export class AppLoginComponent implements OnInit {
             this.authenticationError = false;
             if (!this.router.getCurrentNavigation()) {
               // There were no routing during login (eg from navigationToStoredUrl)
-              this.router.navigate(['/panel']);
+              this.router.navigate(['/user']);
             }
           },
           error: () => (this.authenticationError = true),

@@ -6,6 +6,7 @@ import { IPlayer } from '../player.model';
 @Component({
   selector: 'jhi-player-detail',
   templateUrl: './player-detail.component.html',
+  styleUrls: ['./player-detail.component.css'],
 })
 export class PlayerDetailComponent implements OnInit {
   player: IPlayer | null = null;

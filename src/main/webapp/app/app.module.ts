@@ -33,6 +33,14 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { SidebarComponent } from './layouts/sidebar/sidebar.component';
+import { PlayerComponent } from './entities/player/list/player.component';
+import { PlayerDetailComponent } from './entities/player/detail/player-detail.component';
+import { PlayerUpdateComponent } from './entities/player/update/player-update.component';
+import { PlayerDeleteDialogComponent } from './entities/player/delete/player-delete-dialog.component';
+import { UserComponent } from './entities/jhi-user/list/user.component';
+import { UserDetailComponent } from './entities/jhi-user/detail/user-detail.component';
+import { UserUpdateComponent } from './entities/jhi-user/update/user-update.component';
 
 @NgModule({
   imports: [
@@ -87,8 +95,17 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
     AppRegisterComponent,
     AppCarouselComponent,
     AdminPanelComponent,
+    SidebarComponent,
+    PlayerComponent,
+    PlayerDetailComponent,
+    PlayerUpdateComponent,
+    PlayerDeleteDialogComponent,
+    UserComponent,
+    UserDetailComponent,
+    UserUpdateComponent,
   ],
   bootstrap: [MainComponent],
+  exports: [NavbarComponent, SidebarComponent],
 })
 export class AppModule {
   constructor(applicationConfigService: ApplicationConfigService, iconLibrary: FaIconLibrary, dpConfig: NgbDatepickerConfig) {

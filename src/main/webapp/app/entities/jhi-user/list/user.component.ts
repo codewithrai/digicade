@@ -1,23 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpHeaders } from '@angular/common/http';
+import { IPlayer } from '../../player/player.model';
+import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from '../../../config/pagination.constants';
+// import {EntityArrayResponseType, PlayerService} from "../../player/service/player.service";
 import { ActivatedRoute, Data, ParamMap, Router } from '@angular/router';
-import { combineLatest, filter, Observable, switchMap, tap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-import { IPlayer } from '../player.model';
-
-import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
-import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA } from 'app/config/navigation.constants';
-import { EntityArrayResponseType, PlayerService } from '../service/player.service';
-import { PlayerDeleteDialogComponent } from '../delete/player-delete-dialog.component';
+import { PlayerDeleteDialogComponent } from '../../player/delete/player-delete-dialog.component';
+import { combineLatest, filter, Observable, switchMap, tap } from 'rxjs';
+import { ASC, DEFAULT_SORT_DATA, DESC, ITEM_DELETED_EVENT, SORT } from '../../../config/navigation.constants';
+import { HttpHeaders } from '@angular/common/http';
+import { IUser } from '../user.model';
+import { EntityArrayResponseType, UserService } from '../service/user.service';
 
 @Component({
-  selector: 'jhi-player',
-  templateUrl: './player.component.html',
-  styleUrls: ['./player.component.css'],
+  selector: 'jhi-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.css'],
 })
-export class PlayerComponent implements OnInit {
+export class UserComponent implements OnInit {
   players?: IPlayer[];
+  users?: IUser[];
   isLoading = false;
 
   predicate = 'id';
@@ -28,21 +29,21 @@ export class PlayerComponent implements OnInit {
   page = 1;
 
   constructor(
-    protected playerService: PlayerService,
+    protected userService: UserService,
     protected activatedRoute: ActivatedRoute,
     public router: Router,
     protected modalService: NgbModal
   ) {}
 
-  trackId = (_index: number, item: IPlayer): number => this.playerService.getPlayerIdentifier(item);
+  trackId = (_index: number, item: IUser): number => this.userService.getUserIdentifier(item);
 
   ngOnInit(): void {
     this.load();
   }
 
-  delete(player: IPlayer): void {
+  delete(user: IUser): void {
     const modalRef = this.modalService.open(PlayerDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.player = player;
+    modalRef.componentInstance.player = user;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed
       .pipe(
@@ -90,10 +91,10 @@ export class PlayerComponent implements OnInit {
   protected onResponseSuccess(response: EntityArrayResponseType): void {
     this.fillComponentAttributesFromResponseHeader(response.headers);
     const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
-    this.players = dataFromBody;
+    this.users = dataFromBody;
   }
 
-  protected fillComponentAttributesFromResponseBody(data: IPlayer[] | null): IPlayer[] {
+  protected fillComponentAttributesFromResponseBody(data: IUser[] | null): IUser[] {
     return data ?? [];
   }
 
@@ -109,7 +110,7 @@ export class PlayerComponent implements OnInit {
       size: this.itemsPerPage,
       sort: this.getSortQueryParam(predicate, ascending),
     };
-    return this.playerService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
+    return this.userService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
   }
 
   protected handleNavigation(page = this.page, predicate?: string, ascending?: boolean): void {

@@ -4,6 +4,7 @@ export interface IPlayer {
   tix?: number | null;
   comp?: number | null;
   level?: number | null;
+  xp?: number | null;
   walletAddress?: string | null;
 }
 
