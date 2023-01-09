@@ -2,21 +2,18 @@
   <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-dark">
     <div class="position-sticky">
       <div class="list-group list-group-flush mx-3 mt-4">
-        <a class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+        <a routerLink="/" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
           <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Digicade</span>
         </a>
-        <a routerLink="/user" class="list-group-item list-group-item-action py-2 ripple active">
+        <a routerLink="/user" [routerLinkActive]="['active']" class="list-group-item list-group-item-action py-2 ripple">
           <i class="fas fa-chart-area fa-fw me-3"></i><span>Users</span>
         </a>
-        <a routerLink="/player" class="list-group-item list-group-item-action py-2 ripple active">
+        <a routerLink="/player" [routerLinkActive]="['active']" class="list-group-item list-group-item-action py-2 ripple">
           <i class="fas fa-chart-area fa-fw me-3"></i><span>Players</span>
         </a>
-        <!--        <a routerLink="/panel/game" class="list-group-item list-group-item-action py-2 ripple"><i-->
-        <!--          class="fas fa-lock fa-fw me-3"></i><span>Games</span></a>-->
-        <!--        <a routerLink="/panel/game-badge" class="list-group-item list-group-item-action py-2 ripple"><i-->
-        <!--          class="fas fa-lock fa-fw me-3"></i><span>Game Badge</span></a>-->
-        <!--        <a routerLink="/panel/game-score" class="list-group-item list-group-item-action py-2 ripple"><i-->
-        <!--          class="fas fa-lock fa-fw me-3"></i><span>Game Score</span></a>-->
+        <a routerLink="/game" [routerLinkActive]="['active']" class="list-group-item list-group-item-action py-2 ripple"
+          ><i class="fas fa-lock fa-fw me-3"></i><span>Games</span></a
+        >
       </div>
     </div>
   </nav>

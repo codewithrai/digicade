@@ -4,6 +4,7 @@ import { UserDetailComponent } from './detail/user-detail.component';
 import { SharedModule } from '../../shared/shared.module';
 import { UserRoutingModule } from './route/user-routing-module';
 import { UserUpdateComponent } from './update/user-update.component';
+import { UserDeleteComponent } from './delete/user-delete.component';
 
 @NgModule({
   declarations: [],

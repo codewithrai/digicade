@@ -10,11 +10,4 @@ export class SidebarComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {}
-
-  player() {
-    this.router.navigate(['/player']);
-  }
-  player2() {
-    this.router.navigate(['/panel/player']);
-  }
 }

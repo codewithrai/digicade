@@ -8,6 +8,7 @@ export interface IUser {
   email?: string | null;
   imageUrl?: string | null;
   activated?: boolean | null;
+  authorities?: boolean[] | null;
 }
 
 export type NewUser = Omit<IUser, 'id'> & { id: null };

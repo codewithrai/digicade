@@ -1,5 +1,7 @@
 export interface IGame {
   id: number;
+  name?: string | null;
+  title?: string | null;
   url?: string | null;
   logoUrl?: string | null;
 }

@@ -1,0 +1,12 @@
+.game-update-main {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.sidebar {
+  width: 20%;
+}
+.game-update {
+  width: 79%;
+  padding: 20px;
+}

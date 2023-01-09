@@ -37,6 +37,7 @@ export class UserUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const user = this.userFormService.getUser(this.editForm);
+    console.log('user in save method', user);
     if (user.id !== null) {
       this.subscribeToSaveResponse(this.userService.update(user));
     } else {

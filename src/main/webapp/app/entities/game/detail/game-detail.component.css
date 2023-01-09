@@ -1,0 +1,12 @@
+.game-details-main {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.sidebar {
+  width: 20%;
+}
+.game-details {
+  width: 79%;
+  padding: 20px;
+}

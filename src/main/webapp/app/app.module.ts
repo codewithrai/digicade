@@ -41,6 +41,10 @@ import { PlayerDeleteDialogComponent } from './entities/player/delete/player-del
 import { UserComponent } from './entities/jhi-user/list/user.component';
 import { UserDetailComponent } from './entities/jhi-user/detail/user-detail.component';
 import { UserUpdateComponent } from './entities/jhi-user/update/user-update.component';
+import { GameComponent } from './entities/game/list/game.component';
+import { GameDetailComponent } from './entities/game/detail/game-detail.component';
+import { GameUpdateComponent } from './entities/game/update/game-update.component';
+import { UserDeleteComponent } from './entities/jhi-user/delete/user-delete.component';
 
 @NgModule({
   imports: [
@@ -103,6 +107,10 @@ import { UserUpdateComponent } from './entities/jhi-user/update/user-update.comp
     UserComponent,
     UserDetailComponent,
     UserUpdateComponent,
+    UserDeleteComponent,
+    GameComponent,
+    GameDetailComponent,
+    GameUpdateComponent,
   ],
   bootstrap: [MainComponent],
   exports: [NavbarComponent, SidebarComponent],

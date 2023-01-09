@@ -140,11 +140,17 @@ public class UserService {
         newUser.setImageUrl(userDTO.getImageUrl());
         newUser.setLangKey(userDTO.getLangKey());
         // new user is not active
-        newUser.setActivated(true);
+        //        newUser.setActivated(true);
+        newUser.setActivated(userDTO.isActivated());
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         Set<Authority> authorities = new HashSet<>();
-        authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
+        if (userDTO.getAuthorities().size() > 0) {
+            Set<String> userAuthorities = userDTO.getAuthorities();
+            userAuthorities.forEach(authority -> authorityRepository.findById(authority).ifPresent(authorities::add));
+        } else {
+            authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
+        }
         newUser.setAuthorities(authorities);
 
         Player player = new Player();

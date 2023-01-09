@@ -25,7 +25,7 @@ export class UserService {
   }
 
   update(user: IUser): Observable<EntityResponseType> {
-    return this.http.put<IUser>(`${this.resourceUrl}/${this.getUserIdentifier(user)}`, user, { observe: 'response' });
+    return this.http.put<IUser>(this.resourceUrl, user, { observe: 'response' });
   }
 
   partialUpdate(user: PartialUpdatePlayer): Observable<EntityResponseType> {

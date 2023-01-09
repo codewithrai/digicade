@@ -24,6 +24,7 @@ type UserFormGroupContent = {
   email: FormControl<IUser['email']>;
   imageUrl: FormControl<IUser['imageUrl']>;
   activated: FormControl<IUser['activated']>;
+  authorities: FormControl<IUser['authorities']>;
 };
 
 export type UserFormGroup = FormGroup<UserFormGroupContent>;
@@ -49,6 +50,7 @@ export class UserFormService {
       email: new FormControl(userRawValue.email),
       imageUrl: new FormControl(userRawValue.imageUrl),
       activated: new FormControl(userRawValue.activated),
+      authorities: new FormControl<IUser['authorities']>([]),
     });
   }
 

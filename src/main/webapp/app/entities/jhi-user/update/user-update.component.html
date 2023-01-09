@@ -38,27 +38,35 @@
             </div>
 
             <div class="row mb-3">
-              <label class="form-label" for="field_walletAddress">Image Url</label>
-              <input
-                type="file"
-                class="form-control"
-                name="imageUrl"
-                id="field_walletAddress"
-                data-cy="imageUrl"
-                formControlName="imageUrl"
-              />
+              <label class="form-label" for="field_authorities">Authorities</label>
+              <select
+                name="authorities"
+                formControlName="authorities"
+                id="field_authorities"
+                data-cy="activated"
+                class="form-select"
+                id="field_authorities"
+                multiple
+                aria-label="multiple select example"
+              >
+                <option value="ROLE_USER">ROLE USER</option>
+                <option value="ROLE_ADMIN">ROLE ADMIN</option>
+              </select>
             </div>
 
             <div class="row mb-3">
-              <label class="form-label" for="field_walletAddress">Activated</label>
-              <input
-                type="text"
-                class="form-control"
+              <label class="form-label" for="field_activated">Activated</label>
+              <select
                 name="activated"
-                id="field_walletAddress2"
-                data-cy="activated"
                 formControlName="activated"
-              />
+                id="field_activated"
+                data-cy="activated"
+                class="form-select form-control"
+                aria-label="Default select example"
+              >
+                <option [selected]="editForm.value.activated === null || editForm.value.activated === false" value="false">FALSE</option>
+                <option [selected]="editForm.value.activated === true" value="true">TRUE</option>
+              </select>
             </div>
           </div>
 

@@ -10,6 +10,7 @@ import { ASC, DEFAULT_SORT_DATA, DESC, ITEM_DELETED_EVENT, SORT } from '../../..
 import { HttpHeaders } from '@angular/common/http';
 import { IUser } from '../user.model';
 import { EntityArrayResponseType, UserService } from '../service/user.service';
+import { UserDeleteComponent } from '../delete/user-delete.component';
 
 @Component({
   selector: 'jhi-user',

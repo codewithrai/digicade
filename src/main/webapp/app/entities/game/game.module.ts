@@ -8,6 +8,6 @@ import { GameRoutingModule } from './route/game-routing.module';
 
 @NgModule({
   imports: [SharedModule, GameRoutingModule],
-  declarations: [GameComponent, GameDetailComponent, GameUpdateComponent, GameDeleteDialogComponent],
+  declarations: [GameDeleteDialogComponent],
 })
 export class GameModule {}

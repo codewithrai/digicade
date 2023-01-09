@@ -73,7 +73,7 @@ public class Player implements Serializable {
     private DigiUser digiUser;
 
     @JsonIgnoreProperties(value = { "player" }, allowSetters = true)
-    @OneToOne(mappedBy = "player")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "player")
     private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

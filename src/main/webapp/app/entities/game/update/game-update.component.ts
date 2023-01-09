@@ -11,6 +11,7 @@ import { GameService } from '../service/game.service';
 @Component({
   selector: 'jhi-game-update',
   templateUrl: './game-update.component.html',
+  styleUrls: ['./game-update.component.css'],
 })
 export class GameUpdateComponent implements OnInit {
   isSaving = false;
