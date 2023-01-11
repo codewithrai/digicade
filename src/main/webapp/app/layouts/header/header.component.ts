@@ -10,6 +10,7 @@ import { AccountService } from '../../core/auth/account.service';
 })
 export class HeaderComponent implements OnInit {
   isSignedIn: boolean = false;
+  isAdmin: boolean = false;
 
   constructor(private loginService: LoginService, private router: Router, private accountService: AccountService) {}
 
@@ -18,6 +19,9 @@ export class HeaderComponent implements OnInit {
     this.accountService.identity().subscribe(() => {
       if (this.accountService.isAuthenticated()) {
         this.isSignedIn = true;
+        if (this.accountService.hasAnyAuthority(['ROLE_ADMIN'])) {
+          this.isAdmin = true;
+        }
       }
     });
   }

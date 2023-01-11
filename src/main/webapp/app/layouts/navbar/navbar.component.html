@@ -3,7 +3,6 @@
     <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
       <span class="logo-img"></span>
       <span class="navbar-title">Digicade</span>
-      <span class="navbar-version">{{ version }}</span>
     </a>
     <a
       class="navbar-toggler d-lg-none"
@@ -46,7 +45,7 @@
             <li>
               <a
                 class="dropdown-item"
-                routerLink="digi-user"
+                routerLink="/digi-user"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
@@ -58,7 +57,7 @@
             <li>
               <a
                 class="dropdown-item"
-                routerLink="player"
+                routerLink="/player"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
@@ -70,7 +69,7 @@
             <li>
               <a
                 class="dropdown-item"
-                routerLink="game-badge"
+                routerLink="/game-badge"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
@@ -82,7 +81,7 @@
             <li>
               <a
                 class="dropdown-item"
-                routerLink="game-level"
+                routerLink="/game-level"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
@@ -94,7 +93,7 @@
             <li>
               <a
                 class="dropdown-item"
-                routerLink="game"
+                routerLink="/game"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
@@ -106,7 +105,7 @@
             <li>
               <a
                 class="dropdown-item"
-                routerLink="game-score"
+                routerLink="/game-score"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
@@ -118,7 +117,7 @@
             <li>
               <a
                 class="dropdown-item"
-                routerLink="high-score"
+                routerLink="/high-score"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
@@ -130,7 +129,7 @@
             <li>
               <a
                 class="dropdown-item"
-                routerLink="coin-package"
+                routerLink="/coin-package"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
@@ -142,7 +141,7 @@
             <li>
               <a
                 class="dropdown-item"
-                routerLink="transaction"
+                routerLink="/transaction"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
@@ -154,7 +153,7 @@
             <li>
               <a
                 class="dropdown-item"
-                routerLink="coupon-reward"
+                routerLink="/coupon-reward"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
@@ -166,7 +165,7 @@
             <li>
               <a
                 class="dropdown-item"
-                routerLink="coupon-image"
+                routerLink="/coupon-image"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
@@ -178,7 +177,7 @@
             <li>
               <a
                 class="dropdown-item"
-                routerLink="player-coupon-reward"
+                routerLink="/player-coupon-reward"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
@@ -190,7 +189,7 @@
             <li>
               <a
                 class="dropdown-item"
-                routerLink="nft-reward"
+                routerLink="/nft-reward"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
@@ -202,7 +201,7 @@
             <li>
               <a
                 class="dropdown-item"
-                routerLink="player-nft-reward"
+                routerLink="/player-nft-reward"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
@@ -214,7 +213,7 @@
             <li>
               <a
                 class="dropdown-item"
-                routerLink="daily-reward"
+                routerLink="/daily-reward"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
                 (click)="collapseNavbar()"
@@ -242,25 +241,25 @@
           </a>
           <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="admin-menu">
             <li>
-              <a class="dropdown-item" routerLink="admin/user-management" routerLinkActive="active" (click)="collapseNavbar()">
+              <a class="dropdown-item" routerLink="/admin/user-management" routerLinkActive="active" (click)="collapseNavbar()">
                 <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
                 <span>User management</span>
               </a>
             </li>
             <li>
-              <a class="dropdown-item" routerLink="admin/metrics" routerLinkActive="active" (click)="collapseNavbar()">
+              <a class="dropdown-item" routerLink="/admin/metrics" routerLinkActive="active" (click)="collapseNavbar()">
                 <fa-icon icon="tachometer-alt" [fixedWidth]="true"></fa-icon>
                 <span>Metrics</span>
               </a>
             </li>
             <li>
-              <a class="dropdown-item" routerLink="admin/health" routerLinkActive="active" (click)="collapseNavbar()">
+              <a class="dropdown-item" routerLink="/admin/health" routerLinkActive="active" (click)="collapseNavbar()">
                 <fa-icon icon="heart" [fixedWidth]="true"></fa-icon>
                 <span>Health</span>
               </a>
             </li>
             <li>
-              <a class="dropdown-item" routerLink="admin/configuration" routerLinkActive="active" (click)="collapseNavbar()">
+              <a class="dropdown-item" routerLink="/admin/configuration" routerLinkActive="active" (click)="collapseNavbar()">
                 <fa-icon icon="cogs" [fixedWidth]="true"></fa-icon>
                 <span>Configuration</span>
               </a>
@@ -272,7 +271,7 @@
               </a>
             </li>
             <li *ngIf="openAPIEnabled">
-              <a class="dropdown-item" routerLink="admin/docs" routerLinkActive="active" (click)="collapseNavbar()">
+              <a class="dropdown-item" routerLink="/admin/docs" routerLinkActive="active" (click)="collapseNavbar()">
                 <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
                 <span>API</span>
               </a>

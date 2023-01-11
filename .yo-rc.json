@@ -37,6 +37,9 @@
       "DailyReward"
     ],
     "entitySuffix": "",
+    "herokuAppName": null,
+    "herokuDeployType": "git",
+    "herokuJavaVersion": "17",
     "jhiPrefix": "jhi",
     "jhipsterVersion": "7.9.3",
     "jwtSecretKey": "YTVlMTY5ZWQ5YzkzOTk1MThlZjZjNjEzNjcwMzFjZjdhNmQ1MjIwOTc5OTEzYThhM2M1MmVkYjMzMzY3ZGNlY2U5ZTRkNWYxMGU4YTRjZmViYzRhZWY2MjhiMjJhNDc0YWRhYjEzZDg1NzA4NjFhM2JiMGQwNWQ2YzQ5MGYxNDQ=",

@@ -45,6 +45,7 @@ import { GameComponent } from './entities/game/list/game.component';
 import { GameDetailComponent } from './entities/game/detail/game-detail.component';
 import { GameUpdateComponent } from './entities/game/update/game-update.component';
 import { UserDeleteComponent } from './entities/jhi-user/delete/user-delete.component';
+import { NotFoundComponent } from './layouts/error/not-found.component';
 
 @NgModule({
   imports: [
@@ -90,6 +91,7 @@ import { UserDeleteComponent } from './entities/jhi-user/delete/user-delete.comp
     MainComponent,
     NavbarComponent,
     ErrorComponent,
+    NotFoundComponent,
     PageRibbonComponent,
     FooterComponent,
     AppComponent,

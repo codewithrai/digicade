@@ -1,0 +1,19 @@
+.unauthenticated {
+  text-align: center;
+  margin-top: 10px;
+}
+.unauthenticated h1 {
+  font-weight: 700;
+  font-size: 150px;
+}
+.unauthenticated h3 {
+  font-weight: 600;
+  font-size: 28px;
+  color: tomato;
+}
+.unauthenticated .error-message span {
+  font-weight: bold;
+}
+.unauthenticated button {
+  margin-top: 10px;
+}

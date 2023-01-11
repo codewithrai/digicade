@@ -46,6 +46,10 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
         },
         {
           path: '',
+          data: {
+            authorities: [Authority.ADMIN],
+          },
+          canActivate: [UserRouteAccessService],
           loadChildren: () => import(`./entities/entity-routing.module`).then(m => m.EntityRoutingModule),
         },
         navbarRoute,
