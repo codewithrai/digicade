@@ -62,6 +62,12 @@
                   <fa-icon class="p-1" icon="sort"></fa-icon>
                 </div>
               </th>
+              <th scope="col" jhiSortBy="image">
+                <div class="d-flex">
+                  <span>Image</span>
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                </div>
+              </th>
               <th scope="col" jhiSortBy="logoUrl">
                 <div class="d-flex">
                   <span>Logo Url</span>
@@ -77,6 +83,7 @@
                 <a [routerLink]="['/game', game.id, 'view']">{{ game.id }}</a>
               </td>
               <td>{{ game.name }}</td>
+              <td><img width="40" height="40" src="{{ game.image }}" /></td>
               <td>{{ game.title }}</td>
               <td>{{ game.url }}</td>
               <td>{{ game.logoUrl }}</td>

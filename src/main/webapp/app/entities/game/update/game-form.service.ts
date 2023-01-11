@@ -20,6 +20,7 @@ type GameFormGroupContent = {
   id: FormControl<IGame['id'] | NewGame['id']>;
   name: FormControl<IGame['name']>;
   title: FormControl<IGame['title']>;
+  image: FormControl<IGame['image']>;
   url: FormControl<IGame['url']>;
   logoUrl: FormControl<IGame['logoUrl']>;
 };
@@ -44,6 +45,7 @@ export class GameFormService {
       url: new FormControl(gameRawValue.url),
       name: new FormControl(gameRawValue.url),
       title: new FormControl(gameRawValue.url),
+      image: new FormControl(gameRawValue.image),
       logoUrl: new FormControl(gameRawValue.logoUrl),
     });
   }

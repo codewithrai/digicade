@@ -25,6 +25,9 @@ public class Game implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Column(columnDefinition = "LONGTEXT", name = "image")
+    private String image;
+
     @Column(name = "title")
     private String title;
 
@@ -71,6 +74,14 @@ public class Game implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getTitle() {
@@ -255,6 +266,8 @@ public class Game implements Serializable {
     public String toString() {
         return "Game{" +
             "id=" + getId() +
+            ", name='" + getName() + "'" +
+            ", title='" + getTitle() + "'" +
             ", url='" + getUrl() + "'" +
             ", logoUrl='" + getLogoUrl() + "'" +
             "}";

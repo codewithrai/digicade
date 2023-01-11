@@ -28,6 +28,11 @@
             </div>
 
             <div class="row mb-3">
+              <label class="form-label" for="field_image">Image</label>
+              <input type="file" (change)="uploadImage($event)" class="form-control" name="image" id="field_image" data-cy="image" />
+            </div>
+
+            <div class="row mb-3">
               <label class="form-label" for="field_url">Url</label>
               <input type="text" class="form-control" name="url" id="field_url" data-cy="url" formControlName="url" />
             </div>

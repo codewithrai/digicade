@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { EntityArrayResponseType, GameService } from '../entities/game/service/game.service';
+import { IGame } from '../entities/game/game.model';
+import { Router } from '@angular/router';
+import { AccountService } from '../core/auth/account.service';
 
 @Component({
   selector: 'jhi-app-carousel',
@@ -7,36 +11,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
   styleUrls: ['./app-carousel.component.scss'],
 })
 export class AppCarouselComponent implements OnInit {
-  dynamicSlides = [
-    {
-      id: '1' as string,
-      src: './content/img/main-page/runner.svg',
-      alt: 'Side 2',
-      title: 'Side 2',
-      url: 'https://blog.logrocket.com/how-to-create-fancy-corners-in-css/',
-    },
-    {
-      id: '2' as string,
-      src: './content/img/main-page/Slot.svg',
-      alt: 'Side 3',
-      title: 'Side 3',
-      url: 'https://www.google.com/',
-    },
-    {
-      id: '3' as string,
-      src: './content/img/main-page/match 3.svg',
-      alt: 'Side 4',
-      title: 'Side 4',
-      url: 'https://www.npmjs.com/package/ngx-owl-carousel-o',
-    },
-    {
-      id: '4' as string,
-      src: './content/img/main-page/Slot.svg',
-      alt: 'Side 5',
-      title: 'Side 5',
-      url: 'https://owlcarousel2.github.io/OwlCarousel2/demos/autoplay.html',
-    },
-  ];
+  games?: IGame[] | null;
 
   customOptions: OwlOptions = {
     autoplay: true,
@@ -64,7 +39,27 @@ export class AppCarouselComponent implements OnInit {
     },
   };
 
-  constructor() {}
+  constructor(protected gameService: GameService, private router: Router, private accountService: AccountService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.load();
+  }
+
+  load(): void {
+    this.gameService.get().subscribe({
+      next: res => {
+        console.log('game response', res.body);
+        this.games = res.body;
+      },
+      error: err => {},
+    });
+  }
+
+  playGame(): void {
+    if (this.accountService.isAuthenticated()) {
+      this.router.navigate(['/game']);
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
 }

@@ -17,6 +17,9 @@
             <column name="name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="image" type="longtext">
+                <constraints nullable="true" />
+            </column>
             <column name="title" type="varchar(255)">
                 <constraints nullable="true" />
             </column>

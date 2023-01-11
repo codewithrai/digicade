@@ -1,6 +1,7 @@
 package com.digicade.service;
 
 import com.digicade.service.dto.GameDTO;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -40,6 +41,8 @@ public interface GameService {
      * @return the list of entities.
      */
     Page<GameDTO> findAll(Pageable pageable);
+
+    List<GameDTO> findAllGames();
 
     /**
      * Get the "id" game.
