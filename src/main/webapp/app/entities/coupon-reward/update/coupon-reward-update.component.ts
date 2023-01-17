@@ -11,6 +11,7 @@ import { CouponRewardService } from '../service/coupon-reward.service';
 @Component({
   selector: 'jhi-coupon-reward-update',
   templateUrl: './coupon-reward-update.component.html',
+  styleUrls: ['./coupon-reward-update.component.css'],
 })
 export class CouponRewardUpdateComponent implements OnInit {
   isSaving = false;

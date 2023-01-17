@@ -35,7 +35,7 @@ export class AppLoginComponent implements OnInit {
     // if already authenticated then navigate to home page
     this.accountService.identity().subscribe(() => {
       if (this.accountService.isAuthenticated()) {
-        this.router.navigate(['']);
+        this.router.navigate(['/']);
       }
     });
 
@@ -49,14 +49,22 @@ export class AppLoginComponent implements OnInit {
   }
 
   login(): void {
-    let login = new Login(this.email, this.password, false);
+    let login = new Login(this.email, this.password, this.rememberMe);
     console.log('Form details', login);
     this.loginService.login(login).subscribe({
       next: () => {
         this.authenticationError = false;
         if (!this.router.getCurrentNavigation()) {
           // There were no routing during login (eg from navigationToStoredUrl)
-          this.router.navigate(['/']);
+          this.accountService.identity().subscribe(() => {
+            if (this.accountService.isAuthenticated()) {
+              if (this.accountService.hasAnyAuthority(['ROLE_ADMIN'])) {
+                this.router.navigate(['/user']);
+              } else {
+                this.router.navigate(['/']);
+              }
+            }
+          });
         }
       },
       error: () => (this.authenticationError = true),

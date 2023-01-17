@@ -2,7 +2,7 @@
   <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-dark">
     <div class="position-sticky">
       <div class="list-group list-group-flush mx-3 mt-4">
-        <a routerLink="/" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+        <a routerLink="/user" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
           <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Digicade</span>
         </a>
         <a routerLink="/user" [routerLinkActive]="['active']" class="list-group-item list-group-item-action py-2 ripple">
@@ -11,9 +11,21 @@
         <a routerLink="/player" [routerLinkActive]="['active']" class="list-group-item list-group-item-action py-2 ripple">
           <i class="fas fa-chart-area fa-fw me-3"></i><span>Players</span>
         </a>
-        <a routerLink="/game" [routerLinkActive]="['active']" class="list-group-item list-group-item-action py-2 ripple"
-          ><i class="fas fa-lock fa-fw me-3"></i><span>Games</span></a
-        >
+        <a routerLink="/game" [routerLinkActive]="['active']" class="list-group-item list-group-item-action py-2 ripple">
+          <i class="fas fa-lock fa-fw me-3"></i><span>Games</span>
+        </a>
+        <a routerLink="/game-badge" [routerLinkActive]="['active']" class="list-group-item list-group-item-action py-2 ripple">
+          <i class="fas fa-lock fa-fw me-3"></i><span>Game Badge</span>
+        </a>
+        <a routerLink="/coupon-reward" [routerLinkActive]="['active']" class="list-group-item list-group-item-action py-2 ripple">
+          <i class="fas fa-lock fa-fw me-3"></i><span>Coupon Rewards</span>
+        </a>
+        <a routerLink="/nft-reward" [routerLinkActive]="['active']" class="list-group-item list-group-item-action py-2 ripple">
+          <i class="fas fa-lock fa-fw me-3"></i><span>Nft Rewards</span>
+        </a>
+        <a routerLink="/daily-reward" [routerLinkActive]="['active']" class="list-group-item list-group-item-action py-2 ripple">
+          <i class="fas fa-lock fa-fw me-3"></i><span>Daily Rewards</span>
+        </a>
       </div>
     </div>
   </nav>

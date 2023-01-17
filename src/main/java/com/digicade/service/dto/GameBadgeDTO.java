@@ -11,6 +11,8 @@ public class GameBadgeDTO implements Serializable {
 
     private Long id;
 
+    private Integer xp;
+
     private String logoUrl;
 
     private GameDTO game;
@@ -23,6 +25,14 @@ public class GameBadgeDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getXp() {
+        return xp;
+    }
+
+    public void setXp(Integer xp) {
+        this.xp = xp;
     }
 
     public String getLogoUrl() {

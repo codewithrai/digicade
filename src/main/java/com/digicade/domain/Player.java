@@ -40,31 +40,31 @@ public class Player implements Serializable {
     @Column(name = "wallet_address")
     private String walletAddress;
 
-    @OneToMany(mappedBy = "player")
+    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = { "game", "player" }, allowSetters = true)
     private Set<GameScore> gameScores = new HashSet<>();
 
-    @OneToMany(mappedBy = "player")
+    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = { "game", "player" }, allowSetters = true)
     private Set<HighScore> highScores = new HashSet<>();
 
-    @OneToMany(mappedBy = "player")
+    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = { "player", "game" }, allowSetters = true)
     private Set<GameLevel> gameLevels = new HashSet<>();
 
-    @OneToMany(mappedBy = "player")
+    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = { "game", "player" }, allowSetters = true)
     private Set<GameBadge> gameBadges = new HashSet<>();
 
-    @OneToMany(mappedBy = "player")
+    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = { "player", "coinPackage" }, allowSetters = true)
     private Set<Transaction> transactions = new HashSet<>();
 
-    @OneToMany(mappedBy = "player")
+    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = { "player", "couponReward" }, allowSetters = true)
     private Set<PlayerCouponReward> playerCouponRewards = new HashSet<>();
 
-    @OneToMany(mappedBy = "player")
+    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = { "player", "nftReward" }, allowSetters = true)
     private Set<PlayerNftReward> playerNftRewards = new HashSet<>();
 
@@ -437,6 +437,7 @@ public class Player implements Serializable {
             ", comp=" + getComp() +
             ", level=" + getLevel() +
             ", walletAddress='" + getWalletAddress() + "'" +
+            ", user='" + getUser() + "'" +
             "}";
     }
 }

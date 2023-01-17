@@ -10,6 +10,7 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access.service'
 import { AppLoginComponent } from './app-login/app-login.component';
 import { AppRegisterComponent } from './app-register/app-register.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { GamesComponent } from './games/games.component';
 
 @NgModule({
   imports: [
@@ -35,6 +36,10 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
         {
           path: 'register',
           component: AppRegisterComponent,
+        },
+        {
+          path: 'games',
+          component: GamesComponent,
         },
         {
           path: 'panel',

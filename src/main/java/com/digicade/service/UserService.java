@@ -55,9 +55,6 @@ public class UserService {
     @Autowired
     private GameBadgeRepository gameBadgeRepository;
 
-    @Autowired
-    private GameScoreRepository gameScoreRepository;
-
     public UserService(
         UserRepository userRepository,
         PasswordEncoder passwordEncoder,
@@ -319,10 +316,22 @@ public class UserService {
         return null;
     }
 
-    public UserProfileDTO getUserProfile(Long id) {
-        Optional<User> optional = userRepository.findById(id);
+    public User getUserByLogin(String login) {
+        Optional<User> optional = userRepository.findUserByLogin(login);
 
-        User user = optional.get();
+        if (optional.isPresent()) {
+            return optional.get();
+        }
+
+        return null;
+    }
+
+    public UserProfileDTO getUserProfile(Long id) {
+        Optional<Player> playerOptional = playerRepository.findById(id);
+        log.debug("Request to get Player: {}", playerOptional.get());
+
+        Player player = playerOptional.get();
+        User user = player.getUser();
 
         UserProfileDTO profile = new UserProfileDTO();
 
@@ -333,8 +342,6 @@ public class UserService {
         //profile.setPhoneNumber(null);
         //profile.setGender();
         profile.setImageUrl(user.getImageUrl());
-
-        Player player = user.getPlayer();
 
         profile.setLevel(player.getLevel());
         profile.setXp(player.getXp());

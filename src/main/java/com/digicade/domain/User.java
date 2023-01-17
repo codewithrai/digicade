@@ -92,7 +92,7 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
 
     //"gameScores", "highScores", "gameLevels", "gameBadges",
     @JsonIgnoreProperties(value = { "user", "transactions", "playerCouponRewards", "playerNftRewards", "digiUser" }, allowSetters = true)
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @MapsId
     @JoinColumn(name = "id")
     private Player player;

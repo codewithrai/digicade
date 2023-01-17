@@ -46,6 +46,23 @@ import { GameDetailComponent } from './entities/game/detail/game-detail.componen
 import { GameUpdateComponent } from './entities/game/update/game-update.component';
 import { UserDeleteComponent } from './entities/jhi-user/delete/user-delete.component';
 import { NotFoundComponent } from './layouts/error/not-found.component';
+import { GamesComponent } from './games/games.component';
+import { GameBadgeComponent } from './entities/game-badge/list/game-badge.component';
+import { GameBadgeDetailComponent } from './entities/game-badge/detail/game-badge-detail.component';
+import { GameBadgeUpdateComponent } from './entities/game-badge/update/game-badge-update.component';
+import { GameBadgeDeleteDialogComponent } from './entities/game-badge/delete/game-badge-delete-dialog.component';
+import { CouponRewardComponent } from './entities/coupon-reward/list/coupon-reward.component';
+import { CouponRewardDetailComponent } from './entities/coupon-reward/detail/coupon-reward-detail.component';
+import { CouponRewardUpdateComponent } from './entities/coupon-reward/update/coupon-reward-update.component';
+import { CouponRewardDeleteDialogComponent } from './entities/coupon-reward/delete/coupon-reward-delete-dialog.component';
+import { DailyRewardComponent } from './entities/daily-reward/list/daily-reward.component';
+import { DailyRewardDetailComponent } from './entities/daily-reward/detail/daily-reward-detail.component';
+import { DailyRewardUpdateComponent } from './entities/daily-reward/update/daily-reward-update.component';
+import { DailyRewardDeleteDialogComponent } from './entities/daily-reward/delete/daily-reward-delete-dialog.component';
+import { NftRewardComponent } from './entities/nft-reward/list/nft-reward.component';
+import { NftRewardDetailComponent } from './entities/nft-reward/detail/nft-reward-detail.component';
+import { NftRewardUpdateComponent } from './entities/nft-reward/update/nft-reward-update.component';
+import { NftRewardDeleteDialogComponent } from './entities/nft-reward/delete/nft-reward-delete-dialog.component';
 
 @NgModule({
   imports: [
@@ -102,17 +119,41 @@ import { NotFoundComponent } from './layouts/error/not-found.component';
     AppCarouselComponent,
     AdminPanelComponent,
     SidebarComponent,
+
     PlayerComponent,
     PlayerDetailComponent,
     PlayerUpdateComponent,
     PlayerDeleteDialogComponent,
+
     UserComponent,
     UserDetailComponent,
     UserUpdateComponent,
     UserDeleteComponent,
+
     GameComponent,
     GameDetailComponent,
     GameUpdateComponent,
+    GamesComponent,
+
+    GameBadgeComponent,
+    GameBadgeDetailComponent,
+    GameBadgeUpdateComponent,
+    GameBadgeDeleteDialogComponent,
+
+    CouponRewardComponent,
+    CouponRewardDetailComponent,
+    CouponRewardUpdateComponent,
+    CouponRewardDeleteDialogComponent,
+
+    DailyRewardComponent,
+    DailyRewardDetailComponent,
+    DailyRewardUpdateComponent,
+    DailyRewardDeleteDialogComponent,
+
+    NftRewardComponent,
+    NftRewardDetailComponent,
+    NftRewardUpdateComponent,
+    NftRewardDeleteDialogComponent,
   ],
   bootstrap: [MainComponent],
   exports: [NavbarComponent, SidebarComponent],

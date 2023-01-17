@@ -6,6 +6,7 @@ import { IGameBadge } from '../game-badge.model';
 @Component({
   selector: 'jhi-game-badge-detail',
   templateUrl: './game-badge-detail.component.html',
+  styleUrls: ['./game-badge-detail.component.css'],
 })
 export class GameBadgeDetailComponent implements OnInit {
   gameBadge: IGameBadge | null = null;

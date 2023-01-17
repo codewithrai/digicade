@@ -46,4 +46,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
         "where user.id = :userId"
     )
     Optional<UserProfileDTO> findUserProfileByUserI(@Param("userId") Long userId);
+
+    Optional<User> findUserByLogin(String login);
 }

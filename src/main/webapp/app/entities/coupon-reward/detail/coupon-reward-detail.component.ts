@@ -6,6 +6,7 @@ import { ICouponReward } from '../coupon-reward.model';
 @Component({
   selector: 'jhi-coupon-reward-detail',
   templateUrl: './coupon-reward-detail.component.html',
+  styleUrls: ['./coupon-reward-detail.component.css'],
 })
 export class CouponRewardDetailComponent implements OnInit {
   couponReward: ICouponReward | null = null;

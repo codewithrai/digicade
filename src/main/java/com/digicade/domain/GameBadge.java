@@ -24,6 +24,9 @@ public class GameBadge implements Serializable {
     @Column(name = "logo_url")
     private String logoUrl;
 
+    @Column(name = "xp")
+    private Integer xp;
+
     @ManyToOne
     @JsonIgnoreProperties(value = { "gameScores", "highScores", "gameBadges", "gameLevels" }, allowSetters = true)
     private Game game;
@@ -63,6 +66,14 @@ public class GameBadge implements Serializable {
 
     public void setLogoUrl(String logoUrl) {
         this.logoUrl = logoUrl;
+    }
+
+    public Integer getXp() {
+        return xp;
+    }
+
+    public void setXp(Integer xp) {
+        this.xp = xp;
     }
 
     public Game getGame() {

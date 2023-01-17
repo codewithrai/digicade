@@ -8,6 +8,11 @@ import { DailyRewardRoutingModule } from './route/daily-reward-routing.module';
 
 @NgModule({
   imports: [SharedModule, DailyRewardRoutingModule],
-  declarations: [DailyRewardComponent, DailyRewardDetailComponent, DailyRewardUpdateComponent, DailyRewardDeleteDialogComponent],
+  declarations: [
+    // DailyRewardComponent,
+    // DailyRewardDetailComponent,
+    // DailyRewardUpdateComponent,
+    // DailyRewardDeleteDialogComponent
+  ],
 })
 export class DailyRewardModule {}

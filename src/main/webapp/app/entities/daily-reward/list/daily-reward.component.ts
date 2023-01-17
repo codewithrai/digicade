@@ -14,6 +14,7 @@ import { DailyRewardDeleteDialogComponent } from '../delete/daily-reward-delete-
 @Component({
   selector: 'jhi-daily-reward',
   templateUrl: './daily-reward.component.html',
+  styleUrls: ['./daily-reward.component.css'],
 })
 export class DailyRewardComponent implements OnInit {
   dailyRewards?: IDailyReward[];

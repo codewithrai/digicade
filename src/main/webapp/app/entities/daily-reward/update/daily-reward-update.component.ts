@@ -16,6 +16,7 @@ import { RewardType } from 'app/entities/enumerations/reward-type.model';
 @Component({
   selector: 'jhi-daily-reward-update',
   templateUrl: './daily-reward-update.component.html',
+  styleUrls: ['./daily-reward-update.component.css'],
 })
 export class DailyRewardUpdateComponent implements OnInit {
   isSaving = false;

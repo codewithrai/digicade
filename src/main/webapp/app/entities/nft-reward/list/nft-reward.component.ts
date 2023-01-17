@@ -14,6 +14,7 @@ import { NftRewardDeleteDialogComponent } from '../delete/nft-reward-delete-dial
 @Component({
   selector: 'jhi-nft-reward',
   templateUrl: './nft-reward.component.html',
+  styleUrls: ['./nft-reward.component.css'],
 })
 export class NftRewardComponent implements OnInit {
   nftRewards?: INftReward[];

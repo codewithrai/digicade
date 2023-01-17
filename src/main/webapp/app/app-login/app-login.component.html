@@ -59,6 +59,21 @@
                   </svg>
                 </div>
                 <input [(ngModel)]="password" name="myInput" ng-model="myInput" class="form-input mt-3" required />
+                <div class="d-flex mt-2" style="cursor: pointer">
+                  <label for="remember-me">
+                    <input
+                      style="width: 20px; height: 12px"
+                      type="checkbox"
+                      [(ngModel)]="rememberMe"
+                      name="myInput"
+                      id="remember-me"
+                      ng-model="myInput"
+                      class="form-input"
+                      required
+                    />
+                    <small>Remember ME</small>
+                  </label>
+                </div>
 
                 <div class="d-flex justify-content-center mt-4 cursor-pointer">
                   <svg

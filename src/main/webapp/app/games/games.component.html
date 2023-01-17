@@ -94,7 +94,7 @@
                     </div>
                   </div>
                 </div>
-                <button (click)="startJourney()" class="button cursor-pointer">
+                <button class="button cursor-pointer">
                   <div class="d-flex justify-content-center" style="color: #5d4475">START JOURNEY</div>
                 </button>
               </div>
@@ -110,9 +110,15 @@
   <!--------------------Section 2 (slider )-------->
   <div class="section-two">
     <div class="section-two-one px-5">
-      <div class="h1">Trending Now</div>
-      <div style="margin-top: 4%">
-        <jhi-app-carousel></jhi-app-carousel>
+      <div class="h1">Games</div>
+      <div class="games">
+        <div *ngFor="let game of games" class="carousel-card cursor-pointer">
+          <div class="game">
+            <div>
+              <img src="./content/img/main-page/game1.png" />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="section-two-two">

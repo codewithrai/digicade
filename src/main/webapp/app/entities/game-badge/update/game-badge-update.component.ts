@@ -15,6 +15,7 @@ import { PlayerService } from 'app/entities/player/service/player.service';
 @Component({
   selector: 'jhi-game-badge-update',
   templateUrl: './game-badge-update.component.html',
+  styleUrls: ['./game-badge-update.component.css'],
 })
 export class GameBadgeUpdateComponent implements OnInit {
   isSaving = false;
