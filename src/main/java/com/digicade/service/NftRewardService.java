@@ -55,4 +55,6 @@ public interface NftRewardService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    String purchaseNftReward(Long playerId, Long rewardId) throws Exception;
 }

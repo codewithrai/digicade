@@ -1,6 +1,7 @@
 package com.digicade.service.impl;
 
 import com.digicade.domain.PlayerCouponReward;
+import com.digicade.exceptions.UserNotFoundCustomException;
 import com.digicade.repository.PlayerCouponRewardRepository;
 import com.digicade.service.PlayerCouponRewardService;
 import com.digicade.service.dto.PlayerCouponRewardDTO;
@@ -83,5 +84,20 @@ public class PlayerCouponRewardServiceImpl implements PlayerCouponRewardService 
     public void delete(Long id) {
         log.debug("Request to delete PlayerCouponReward : {}", id);
         playerCouponRewardRepository.deleteById(id);
+    }
+
+    @Override
+    public PlayerCouponRewardDTO getPlayerCouponRewardByPlayerId(Long playerId) throws Exception {
+        Optional<PlayerCouponRewardDTO> optional = playerCouponRewardRepository
+            .findByPlayerId(playerId)
+            .map(playerCouponRewardMapper::toDto);
+
+        if (!optional.isPresent()) {
+            throw new UserNotFoundCustomException("Player Coupon Reward not found with player id: " + playerId);
+        }
+
+        PlayerCouponRewardDTO playerCouponRewardDTO = optional.get();
+
+        return playerCouponRewardDTO;
     }
 }

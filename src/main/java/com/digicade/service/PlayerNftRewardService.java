@@ -55,4 +55,6 @@ public interface PlayerNftRewardService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    PlayerNftRewardDTO getPlayerNftRewardByPlayerId(Long playerId) throws Exception;
 }

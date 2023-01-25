@@ -178,4 +178,11 @@ public class NftRewardResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    @GetMapping("/nft-rewards/purchase/{playerId}/{rewardId}")
+    public ResponseEntity<String> purchaseNftReward(@PathVariable Long playerId, @PathVariable Long rewardId) throws Exception {
+        String message = nftRewardService.purchaseNftReward(playerId, rewardId);
+
+        return ResponseEntity.ok(message);
+    }
 }

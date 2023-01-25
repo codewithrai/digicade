@@ -2,6 +2,7 @@ package com.digicade.service.impl;
 
 import com.digicade.domain.GameLevel;
 import com.digicade.domain.Player;
+import com.digicade.exceptions.UserNotFoundCustomException;
 import com.digicade.repository.GameLevelRepository;
 import com.digicade.repository.PlayerRepository;
 import com.digicade.service.GameLevelService;

@@ -2,11 +2,13 @@ package com.digicade.service;
 
 import com.digicade.config.Constants;
 import com.digicade.domain.*;
+import com.digicade.exceptions.UserNotFoundCustomException;
 import com.digicade.repository.*;
 import com.digicade.security.AuthoritiesConstants;
 import com.digicade.security.SecurityUtils;
 import com.digicade.service.dto.*;
 import com.digicade.service.mapper.GameLevelMapper;
+import com.digicade.service.mapper.PlayerMapper;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -21,6 +23,7 @@ import org.springframework.cache.CacheManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,10 +44,7 @@ public class UserService {
     private PlayerRepository playerRepository;
 
     @Autowired
-    private GameLevelRepository gameLevelRepository;
-
-    @Autowired
-    private GameLevelMapper gameLevelMapper;
+    private PlayerMapper playerMapper;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -326,11 +326,15 @@ public class UserService {
         return null;
     }
 
-    public UserProfileDTO getUserProfile(Long id) {
+    public UserProfileDTO getUserProfile(Long id) throws Exception {
         Optional<Player> playerOptional = playerRepository.findById(id);
-        log.debug("Request to get Player: {}", playerOptional.get());
+
+        if (!playerOptional.isPresent()) {
+            throw new UserNotFoundCustomException("Player not found with ID: " + id);
+        }
 
         Player player = playerOptional.get();
+        log.debug("Request to get Player: {}", player);
         User user = player.getUser();
 
         UserProfileDTO profile = new UserProfileDTO();

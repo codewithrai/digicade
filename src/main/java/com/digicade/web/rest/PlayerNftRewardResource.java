@@ -181,4 +181,11 @@ public class PlayerNftRewardResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    @GetMapping("/player-nft-rewards/nft/{playerId}")
+    public ResponseEntity<PlayerNftRewardDTO> getPlayerNftRewardByPlayerId(@PathVariable Long playerId) throws Exception {
+        PlayerNftRewardDTO playerNftRewardDTO = playerNftRewardService.getPlayerNftRewardByPlayerId(playerId);
+
+        return ResponseEntity.ok(playerNftRewardDTO);
+    }
 }

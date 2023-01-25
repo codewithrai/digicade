@@ -55,4 +55,6 @@ public interface CouponRewardService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    String purchaseCouponReward(Long playerId, Long rewardId) throws Exception;
 }

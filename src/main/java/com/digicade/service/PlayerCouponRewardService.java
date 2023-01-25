@@ -55,4 +55,6 @@ public interface PlayerCouponRewardService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    PlayerCouponRewardDTO getPlayerCouponRewardByPlayerId(Long playerId) throws Exception;
 }
