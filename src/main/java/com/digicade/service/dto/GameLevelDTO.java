@@ -13,7 +13,7 @@ public class GameLevelDTO implements Serializable {
 
     private Integer level;
 
-    private Integer xp;
+    private Integer score;
 
     private PlayerDTO player;
 
@@ -35,12 +35,12 @@ public class GameLevelDTO implements Serializable {
         this.level = level;
     }
 
-    public Integer getXp() {
-        return xp;
+    public Integer getScore() {
+        return score;
     }
 
-    public void setXp(Integer xp) {
-        this.xp = xp;
+    public void setScore(Integer score) {
+        this.score = score;
     }
 
     public PlayerDTO getPlayer() {
@@ -86,6 +86,7 @@ public class GameLevelDTO implements Serializable {
         return "GameLevelDTO{" +
             "id=" + getId() +
             ", level=" + getLevel() +
+            ", score=" + getScore() +
             ", player=" + getPlayer() +
             ", game=" + getGame() +
             "}";

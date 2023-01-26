@@ -10,7 +10,6 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "game_score")
-@JsonIgnoreProperties(value = { "player" })
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class GameScore implements Serializable {
 
@@ -28,18 +27,22 @@ public class GameScore implements Serializable {
     @Column(name = "date")
     private LocalDate date;
 
-    private Long won;
-
-    private Long lost;
-
     @ManyToOne
-    @JsonIgnoreProperties(value = { "gameScores", "highScores", "gameBadges", "gameLevels" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "gameBadges", "gameLevels", "gameScores", "highScores" }, allowSetters = true)
     private Game game;
 
     @ManyToOne
     @JsonIgnoreProperties(
         value = {
-            "gameScores", "highScores", "gameLevels", "gameBadges", "transactions", "playerCouponRewards", "playerNftRewards", "digiUser",
+            "gameBadges",
+            "playerGameBadges",
+            "gameLevels",
+            "gameScores",
+            "highScores",
+            "playerCouponRewards",
+            "playerNftRewards",
+            "transactions",
+            "digiUser",
         },
         allowSetters = true
     )
@@ -80,22 +83,6 @@ public class GameScore implements Serializable {
     public GameScore date(LocalDate date) {
         this.setDate(date);
         return this;
-    }
-
-    public Long getWon() {
-        return won;
-    }
-
-    public void setWon(Long won) {
-        this.won = won;
-    }
-
-    public Long getLost() {
-        return lost;
-    }
-
-    public void setLost(Long lost) {
-        this.lost = lost;
     }
 
     public void setDate(LocalDate date) {

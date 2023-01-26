@@ -24,7 +24,7 @@ public class CouponImage implements Serializable {
     private String imageUrl;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "couponImages", "playerCouponRewards", "dailyRewards" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "couponImages", "dailyRewards", "playerCouponRewards" }, allowSetters = true)
     private CouponReward couponReward;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

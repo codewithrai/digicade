@@ -14,7 +14,6 @@ import { PlayerDeleteDialogComponent } from '../delete/player-delete-dialog.comp
 @Component({
   selector: 'jhi-player',
   templateUrl: './player.component.html',
-  styleUrls: ['./player.component.css'],
 })
 export class PlayerComponent implements OnInit {
   players?: IPlayer[];

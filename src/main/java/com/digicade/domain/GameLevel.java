@@ -2,10 +2,7 @@ package com.digicade.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
-import java.sql.Timestamp;
-import java.util.Date;
 import javax.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
 
 /**
  * A GameLevel.
@@ -26,22 +23,28 @@ public class GameLevel implements Serializable {
     @Column(name = "level")
     private Integer level;
 
-    @Column(name = "xp")
-    private Integer xp;
-
-    private Timestamp createdAt;
+    @Column(name = "score")
+    private Integer score;
 
     @ManyToOne
     @JsonIgnoreProperties(
         value = {
-            "gameScores", "highScores", "gameLevels", "gameBadges", "transactions", "playerCouponRewards", "playerNftRewards", "digiUser",
+            "gameBadges",
+            "playerGameBadges",
+            "gameLevels",
+            "gameScores",
+            "highScores",
+            "playerCouponRewards",
+            "playerNftRewards",
+            "transactions",
+            "digiUser",
         },
         allowSetters = true
     )
     private Player player;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "gameScores", "highScores", "gameBadges", "gameLevels" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "gameBadges", "gameLevels", "gameScores", "highScores" }, allowSetters = true)
     private Game game;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -72,24 +75,17 @@ public class GameLevel implements Serializable {
         this.level = level;
     }
 
+    public Integer getScore() {
+        return this.score;
+    }
+
     public GameLevel score(Integer score) {
+        this.setScore(score);
         return this;
     }
 
-    public Integer getXp() {
-        return xp;
-    }
-
-    public void setXp(Integer xp) {
-        this.xp = xp;
-    }
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+    public void setScore(Integer score) {
+        this.score = score;
     }
 
     public Player getPlayer() {
@@ -143,6 +139,7 @@ public class GameLevel implements Serializable {
         return "GameLevel{" +
             "id=" + getId() +
             ", level=" + getLevel() +
+            ", score=" + getScore() +
             "}";
     }
 }

@@ -16,6 +16,8 @@ public class DigiUser implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
     @Column(name = "id")
     private Long id;
 
@@ -42,13 +44,20 @@ public class DigiUser implements Serializable {
 
     @JsonIgnoreProperties(
         value = {
-            "gameScores", "highScores", "gameLevels", "gameBadges", "transactions", "playerCouponRewards", "playerNftRewards", "digiUser",
+            "gameBadges",
+            "playerGameBadges",
+            "gameLevels",
+            "gameScores",
+            "highScores",
+            "playerCouponRewards",
+            "playerNftRewards",
+            "transactions",
+            "digiUser",
         },
         allowSetters = true
     )
     @OneToOne
-    @MapsId
-    @JoinColumn(name = "id")
+    @JoinColumn(unique = true)
     private Player player;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

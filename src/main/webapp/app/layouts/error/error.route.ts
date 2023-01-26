@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 
 import { ErrorComponent } from './error.component';
-import { NotFoundComponent } from './not-found.component';
 
 export const errorRoute: Routes = [
   {
@@ -15,15 +14,15 @@ export const errorRoute: Routes = [
     path: 'accessdenied',
     component: ErrorComponent,
     data: {
-      pageTitle: 'Unauthorized Request!',
+      pageTitle: 'Error page!',
       errorMessage: 'You are not authorized to access this page.',
     },
   },
   {
     path: '404',
-    component: NotFoundComponent,
+    component: ErrorComponent,
     data: {
-      pageTitle: 'Not Found page!',
+      pageTitle: 'Error page!',
       errorMessage: 'The page does not exist.',
     },
   },

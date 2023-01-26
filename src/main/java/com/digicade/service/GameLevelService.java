@@ -2,8 +2,6 @@ package com.digicade.service;
 
 import com.digicade.service.dto.GameLevelDTO;
 import java.util.Optional;
-
-import com.digicade.service.dto.LeaderBoard;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -57,7 +55,4 @@ public interface GameLevelService {
      * @param id the id of the entity.
      */
     void delete(Long id);
-
-
-    LeaderBoard getLeaderBoardByGameId(Long id, String filter);
 }

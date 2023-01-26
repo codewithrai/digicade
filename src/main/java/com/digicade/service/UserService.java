@@ -1,29 +1,24 @@
 package com.digicade.service;
 
 import com.digicade.config.Constants;
-import com.digicade.domain.*;
-import com.digicade.exceptions.UserNotFoundCustomException;
-import com.digicade.repository.*;
+import com.digicade.domain.Authority;
+import com.digicade.domain.User;
+import com.digicade.repository.AuthorityRepository;
+import com.digicade.repository.UserRepository;
 import com.digicade.security.AuthoritiesConstants;
 import com.digicade.security.SecurityUtils;
-import com.digicade.service.dto.*;
-import com.digicade.service.mapper.GameLevelMapper;
-import com.digicade.service.mapper.PlayerMapper;
-import java.sql.Timestamp;
+import com.digicade.service.dto.AdminUserDTO;
+import com.digicade.service.dto.UserDTO;
 import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,20 +35,11 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    @Autowired
-    private PlayerRepository playerRepository;
-
-    @Autowired
-    private PlayerMapper playerMapper;
-
     private final PasswordEncoder passwordEncoder;
 
     private final AuthorityRepository authorityRepository;
 
     private final CacheManager cacheManager;
-
-    @Autowired
-    private GameBadgeRepository gameBadgeRepository;
 
     public UserService(
         UserRepository userRepository,
@@ -137,28 +123,12 @@ public class UserService {
         newUser.setImageUrl(userDTO.getImageUrl());
         newUser.setLangKey(userDTO.getLangKey());
         // new user is not active
-        //        newUser.setActivated(true);
-        newUser.setActivated(userDTO.isActivated());
+        newUser.setActivated(false);
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         Set<Authority> authorities = new HashSet<>();
-        if (userDTO.getAuthorities().size() > 0) {
-            Set<String> userAuthorities = userDTO.getAuthorities();
-            userAuthorities.forEach(authority -> authorityRepository.findById(authority).ifPresent(authorities::add));
-        } else {
-            authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
-        }
+        authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
         newUser.setAuthorities(authorities);
-
-        Player player = new Player();
-        player.setGamePlayCredits(0);
-        player.setTix(0);
-        player.setComp(0);
-        player.setLevel(0);
-        player.setXp(0);
-        Player savedPlayer = playerRepository.save(player);
-        newUser.setPlayer(savedPlayer);
-
         userRepository.save(newUser);
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
@@ -304,62 +274,6 @@ public class UserService {
     @Transactional(readOnly = true)
     public Page<AdminUserDTO> getAllManagedUsers(Pageable pageable) {
         return userRepository.findAll(pageable).map(AdminUserDTO::new);
-    }
-
-    public User getUserById(Long id) {
-        Optional<User> optional = userRepository.findById(id);
-
-        if (optional.isPresent()) {
-            return optional.get();
-        }
-
-        return null;
-    }
-
-    public User getUserByLogin(String login) {
-        Optional<User> optional = userRepository.findUserByLogin(login);
-
-        if (optional.isPresent()) {
-            return optional.get();
-        }
-
-        return null;
-    }
-
-    public UserProfileDTO getUserProfile(Long id) throws Exception {
-        Optional<Player> playerOptional = playerRepository.findById(id);
-
-        if (!playerOptional.isPresent()) {
-            throw new UserNotFoundCustomException("Player not found with ID: " + id);
-        }
-
-        Player player = playerOptional.get();
-        log.debug("Request to get Player: {}", player);
-        User user = player.getUser();
-
-        UserProfileDTO profile = new UserProfileDTO();
-
-        profile.setFirstName(user.getFirstName());
-        profile.setLastName(user.getLastName());
-        profile.setUsername(user.getLogin());
-        profile.setEmail(user.getEmail());
-        //profile.setPhoneNumber(null);
-        //profile.setGender();
-        profile.setImageUrl(user.getImageUrl());
-
-        profile.setLevel(player.getLevel());
-        profile.setXp(player.getXp());
-        profile.setTix(player.getTix());
-        profile.setComp(player.getComp());
-        profile.setCredit(player.getGamePlayCredits());
-
-        Long playerId = player.getId();
-
-        Set<GameBadge> badges = gameBadgeRepository.findGameBadgeByPlayerId(playerId);
-
-        profile.setGameBadges(badges);
-
-        return profile;
     }
 
     @Transactional(readOnly = true)

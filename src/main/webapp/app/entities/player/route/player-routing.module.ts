@@ -6,6 +6,7 @@ import { PlayerComponent } from '../list/player.component';
 import { PlayerDetailComponent } from '../detail/player-detail.component';
 import { PlayerUpdateComponent } from '../update/player-update.component';
 import { PlayerRoutingResolveService } from './player-routing-resolve.service';
+import { ASC } from 'app/config/navigation.constants';
 
 const playerRoute: Routes = [
   {
@@ -41,8 +42,6 @@ const playerRoute: Routes = [
     canActivate: [UserRouteAccessService],
   },
 ];
-
-import { ASC } from 'app/config/navigation.constants';
 
 @NgModule({
   imports: [RouterModule.forChild(playerRoute)],

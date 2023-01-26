@@ -14,7 +14,6 @@ import { GameDeleteDialogComponent } from '../delete/game-delete-dialog.componen
 @Component({
   selector: 'jhi-game',
   templateUrl: './game.component.html',
-  styleUrls: ['./game.component.css'],
 })
 export class GameComponent implements OnInit {
   games?: IGame[];

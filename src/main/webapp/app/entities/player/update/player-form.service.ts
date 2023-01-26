@@ -22,7 +22,6 @@ type PlayerFormGroupContent = {
   tix: FormControl<IPlayer['tix']>;
   comp: FormControl<IPlayer['comp']>;
   level: FormControl<IPlayer['level']>;
-  xp: FormControl<IPlayer['xp']>;
   walletAddress: FormControl<IPlayer['walletAddress']>;
 };
 
@@ -47,7 +46,6 @@ export class PlayerFormService {
       tix: new FormControl(playerRawValue.tix),
       comp: new FormControl(playerRawValue.comp),
       level: new FormControl(playerRawValue.level),
-      xp: new FormControl(playerRawValue.xp),
       walletAddress: new FormControl(playerRawValue.walletAddress),
     });
   }

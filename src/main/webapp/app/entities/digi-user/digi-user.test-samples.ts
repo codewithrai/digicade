@@ -3,26 +3,27 @@ import dayjs from 'dayjs/esm';
 import { IDigiUser, NewDigiUser } from './digi-user.model';
 
 export const sampleWithRequiredData: IDigiUser = {
-  id: 79194,
+  id: 44513,
 };
 
 export const sampleWithPartialData: IDigiUser = {
-  id: 42634,
-  userName: 'Health transmit group',
-  email: 'Grover.Schowalter34@hotmail.com',
-  age: 42113,
-  promoCode: 'Investor',
+  id: 568,
+  lastName: 'Kohler',
+  userName: 'transmit group',
+  dob: dayjs('2022-12-20'),
+  age: 40273,
+  promoCode: 'Officer eyeballs Account',
 };
 
 export const sampleWithFullData: IDigiUser = {
-  id: 1603,
-  firstName: 'Turner',
-  lastName: 'Bauch',
-  userName: 'Account',
-  email: 'Elenora.Raynor@gmail.com',
+  id: 4207,
+  firstName: 'Carlie',
+  lastName: 'Mills',
+  userName: 'Functionality',
+  email: 'Lilyan_Glover4@hotmail.com',
   dob: dayjs('2022-12-20'),
-  age: 94113,
-  promoCode: 'Crossing',
+  age: 14011,
+  promoCode: '24/7',
 };
 
 export const sampleWithNewData: NewDigiUser = {

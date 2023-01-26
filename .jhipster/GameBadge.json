@@ -1,5 +1,5 @@
 {
-  "applications": "*",
+  "applications": ["digicade"],
   "changelogDate": "20221221095514",
   "dto": "mapstruct",
   "embedded": false,
@@ -16,6 +16,12 @@
   "pagination": "pagination",
   "readOnly": false,
   "relationships": [
+    {
+      "otherEntityName": "playerGameBadge",
+      "otherEntityRelationshipName": "gameBadge",
+      "relationshipName": "playerGameBadge",
+      "relationshipType": "one-to-many"
+    },
     {
       "otherEntityName": "game",
       "otherEntityRelationshipName": "gameBadge",

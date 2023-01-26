@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { JhiUserModule } from './jhi-user/jhi-user.module';
 
 @NgModule({
   imports: [
@@ -9,11 +8,6 @@ import { JhiUserModule } from './jhi-user/jhi-user.module';
         path: 'digi-user',
         data: { pageTitle: 'DigiUsers' },
         loadChildren: () => import('./digi-user/digi-user.module').then(m => m.DigiUserModule),
-      },
-      {
-        path: 'user',
-        data: { pageTitle: 'Users' },
-        loadChildren: () => import('./jhi-user/jhi-user.module').then(m => m.JhiUserModule),
       },
       {
         path: 'player',
@@ -84,6 +78,11 @@ import { JhiUserModule } from './jhi-user/jhi-user.module';
         path: 'daily-reward',
         data: { pageTitle: 'DailyRewards' },
         loadChildren: () => import('./daily-reward/daily-reward.module').then(m => m.DailyRewardModule),
+      },
+      {
+        path: 'player-game-badge',
+        data: { pageTitle: 'PlayerGameBadges' },
+        loadChildren: () => import('./player-game-badge/player-game-badge.module').then(m => m.PlayerGameBadgeModule),
       },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),

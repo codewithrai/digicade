@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="playerGameBadge">
+      <h2 data-cy="playerGameBadgeDetailsHeading"><span>Player Game Badge</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ playerGameBadge.id }}</span>
+        </dd>
+        <dt><span>Game Badge</span></dt>
+        <dd>
+          <div *ngIf="playerGameBadge.gameBadge">
+            <a [routerLink]="['/game-badge', playerGameBadge.gameBadge.id, 'view']">{{ playerGameBadge.gameBadge.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Player</span></dt>
+        <dd>
+          <div *ngIf="playerGameBadge.player">
+            <a [routerLink]="['/player', playerGameBadge.player.id, 'view']">{{ playerGameBadge.player.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/player-game-badge', playerGameBadge.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

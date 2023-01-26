@@ -1,5 +1,5 @@
 {
-  "applications": "*",
+  "applications": ["digicade"],
   "changelogDate": "20221221095512",
   "dto": "mapstruct",
   "embedded": false,
@@ -41,13 +41,11 @@
   "readOnly": false,
   "relationships": [
     {
-      "id": true,
       "otherEntityName": "player",
       "otherEntityRelationshipName": "digiUser",
       "ownerSide": true,
       "relationshipName": "player",
-      "relationshipType": "one-to-one",
-      "useJPADerivedIdentifier": true
+      "relationshipType": "one-to-one"
     }
   ],
   "service": "serviceImpl"

@@ -59,9 +59,6 @@ public class DigiUserResource {
         if (digiUserDTO.getId() != null) {
             throw new BadRequestAlertException("A new digiUser cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        if (Objects.isNull(digiUserDTO.getPlayer())) {
-            throw new BadRequestAlertException("Invalid association value provided", ENTITY_NAME, "null");
-        }
         DigiUserDTO result = digiUserService.save(digiUserDTO);
         return ResponseEntity
             .created(new URI("/api/digi-users/" + result.getId()))

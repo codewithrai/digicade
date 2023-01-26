@@ -63,7 +63,7 @@ export class RegisterComponent implements AfterViewInit {
     } else {
       const { login, email } = this.registerForm.getRawValue();
       this.registerService
-        .save({ firstName: '', lastName: '', login: '', email, password, authorities: ['ROLE_USER'], langKey: 'en', activated: true })
+        .save({ login, email, password, langKey: 'en' })
         .subscribe({ next: () => (this.success = true), error: response => this.processError(response) });
     }
   }

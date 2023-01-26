@@ -1,5 +1,5 @@
 {
-  "applications": "*",
+  "applications": ["digicade"],
   "changelogDate": "20221221095524",
   "dto": "mapstruct",
   "embedded": false,
@@ -25,15 +25,15 @@
   "readOnly": false,
   "relationships": [
     {
-      "otherEntityName": "playerNftReward",
-      "otherEntityRelationshipName": "nftReward",
-      "relationshipName": "playerNftReward",
-      "relationshipType": "one-to-many"
-    },
-    {
       "otherEntityName": "dailyReward",
       "otherEntityRelationshipName": "nftReward",
       "relationshipName": "dailyReward",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "playerNftReward",
+      "otherEntityRelationshipName": "nftReward",
+      "relationshipName": "playerNftReward",
       "relationshipType": "one-to-many"
     }
   ],

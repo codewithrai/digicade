@@ -178,11 +178,4 @@ public class CouponRewardResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
     }
-
-    @GetMapping("/coupon-rewards/purchase/{playerId}/{rewardId}")
-    public ResponseEntity<String> purchaseCouponReward(@PathVariable Long playerId, @PathVariable Long rewardId) throws Exception {
-        String message = couponRewardService.purchaseCouponReward(playerId, rewardId);
-
-        return ResponseEntity.ok(message);
-    }
 }

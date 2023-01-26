@@ -1,22 +1,13 @@
 package com.digicade.service.impl;
 
 import com.digicade.domain.NftReward;
-import com.digicade.exceptions.UserNotFoundCustomException;
 import com.digicade.repository.NftRewardRepository;
-import com.digicade.repository.PlayerRepository;
 import com.digicade.service.NftRewardService;
-import com.digicade.service.PlayerNftRewardService;
-import com.digicade.service.PlayerService;
 import com.digicade.service.dto.NftRewardDTO;
-import com.digicade.service.dto.PlayerDTO;
-import com.digicade.service.dto.PlayerNftRewardDTO;
 import com.digicade.service.mapper.NftRewardMapper;
-import com.digicade.service.mapper.PlayerMapper;
-import java.time.LocalDate;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -34,18 +25,6 @@ public class NftRewardServiceImpl implements NftRewardService {
     private final NftRewardRepository nftRewardRepository;
 
     private final NftRewardMapper nftRewardMapper;
-
-    @Autowired
-    private PlayerRepository playerRepository;
-
-    @Autowired
-    private PlayerMapper playerMapper;
-
-    @Autowired
-    private PlayerNftRewardService playerNftRewardService;
-
-    @Autowired
-    private PlayerService playerService;
 
     public NftRewardServiceImpl(NftRewardRepository nftRewardRepository, NftRewardMapper nftRewardMapper) {
         this.nftRewardRepository = nftRewardRepository;
@@ -101,45 +80,5 @@ public class NftRewardServiceImpl implements NftRewardService {
     public void delete(Long id) {
         log.debug("Request to delete NftReward : {}", id);
         nftRewardRepository.deleteById(id);
-    }
-
-    @Override
-    public String purchaseNftReward(Long playerId, Long rewardId) throws Exception {
-        Optional<NftRewardDTO> optionalNftRewardDTO = nftRewardRepository.findById(rewardId).map(nftRewardMapper::toDto);
-        Optional<PlayerDTO> optionalPlayerDTO = playerRepository.findById(playerId).map(playerMapper::toDto);
-
-        if (!optionalNftRewardDTO.isPresent()) {
-            throw new UserNotFoundCustomException("NFT reward not found with id: " + rewardId);
-        }
-        if (!optionalPlayerDTO.isPresent()) {
-            throw new UserNotFoundCustomException("Player not found with id: " + playerId);
-        }
-
-        PlayerDTO playerDTO = optionalPlayerDTO.get();
-        NftRewardDTO nftRewardDTO = optionalNftRewardDTO.get();
-
-        Integer playerTix = playerDTO.getTix();
-        Integer playerComp = playerDTO.getComp();
-
-        Integer nftRewardTix = nftRewardDTO.getTix();
-        Integer nftRewardComp = nftRewardDTO.getComp();
-
-        if (playerTix >= nftRewardTix && playerComp >= nftRewardComp) {
-            // SAVE: Player NFT Reward
-            PlayerNftRewardDTO playerNftRewardDTO = new PlayerNftRewardDTO();
-            playerNftRewardDTO.setNftReward(nftRewardDTO);
-            playerNftRewardDTO.setPlayer(playerDTO);
-            playerNftRewardDTO.setDate(LocalDate.now());
-            playerNftRewardService.save(playerNftRewardDTO);
-
-            // UPDATE: subtract tix and comp from player
-            playerDTO.setTix(playerTix - nftRewardTix);
-            playerDTO.setComp(playerComp - nftRewardComp);
-            playerService.partialUpdate(playerDTO);
-
-            return "NFT purchased";
-        } else {
-            return nftRewardTix + " Tix and " + nftRewardComp + " comp are required to purchase this NFT Reward";
-        }
     }
 }

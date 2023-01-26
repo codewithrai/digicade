@@ -14,6 +14,5 @@ import { PlayerCouponRewardRoutingModule } from './route/player-coupon-reward-ro
     PlayerCouponRewardUpdateComponent,
     PlayerCouponRewardDeleteDialogComponent,
   ],
-  exports: [PlayerCouponRewardComponent],
 })
 export class PlayerCouponRewardModule {}

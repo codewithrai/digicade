@@ -1,5 +1,5 @@
 {
-  "applications": "*",
+  "applications": ["digicade"],
   "changelogDate": "20221221095516",
   "dto": "mapstruct",
   "embedded": false,
@@ -21,18 +21,6 @@
   "readOnly": false,
   "relationships": [
     {
-      "otherEntityName": "gameScore",
-      "otherEntityRelationshipName": "game",
-      "relationshipName": "gameScore",
-      "relationshipType": "one-to-many"
-    },
-    {
-      "otherEntityName": "highScore",
-      "otherEntityRelationshipName": "game",
-      "relationshipName": "highScore",
-      "relationshipType": "one-to-many"
-    },
-    {
       "otherEntityName": "gameBadge",
       "otherEntityRelationshipName": "game",
       "relationshipName": "gameBadge",
@@ -42,6 +30,18 @@
       "otherEntityName": "gameLevel",
       "otherEntityRelationshipName": "game",
       "relationshipName": "gameLevel",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "gameScore",
+      "otherEntityRelationshipName": "game",
+      "relationshipName": "gameScore",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "highScore",
+      "otherEntityRelationshipName": "game",
+      "relationshipName": "highScore",
       "relationshipType": "one-to-many"
     }
   ],

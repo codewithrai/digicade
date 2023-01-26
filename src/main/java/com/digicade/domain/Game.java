@@ -22,20 +22,19 @@ public class Game implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
-    private String name;
-
-    @Column(columnDefinition = "LONGTEXT", name = "image")
-    private String image;
-
-    @Column(name = "title")
-    private String title;
-
     @Column(name = "url")
     private String url;
 
     @Column(name = "logo_url")
     private String logoUrl;
+
+    @OneToMany(mappedBy = "game")
+    @JsonIgnoreProperties(value = { "playerGameBadges", "game", "player" }, allowSetters = true)
+    private Set<GameBadge> gameBadges = new HashSet<>();
+
+    @OneToMany(mappedBy = "game")
+    @JsonIgnoreProperties(value = { "player", "game" }, allowSetters = true)
+    private Set<GameLevel> gameLevels = new HashSet<>();
 
     @OneToMany(mappedBy = "game")
     @JsonIgnoreProperties(value = { "game", "player" }, allowSetters = true)
@@ -44,14 +43,6 @@ public class Game implements Serializable {
     @OneToMany(mappedBy = "game")
     @JsonIgnoreProperties(value = { "game", "player" }, allowSetters = true)
     private Set<HighScore> highScores = new HashSet<>();
-
-    @OneToMany(mappedBy = "game")
-    @JsonIgnoreProperties(value = { "game", "player" }, allowSetters = true)
-    private Set<GameBadge> gameBadges = new HashSet<>();
-
-    @OneToMany(mappedBy = "game")
-    @JsonIgnoreProperties(value = { "player", "game" }, allowSetters = true)
-    private Set<GameLevel> gameLevels = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -66,30 +57,6 @@ public class Game implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getUrl() {
@@ -116,68 +83,6 @@ public class Game implements Serializable {
 
     public void setLogoUrl(String logoUrl) {
         this.logoUrl = logoUrl;
-    }
-
-    public Set<GameScore> getGameScores() {
-        return this.gameScores;
-    }
-
-    public void setGameScores(Set<GameScore> gameScores) {
-        if (this.gameScores != null) {
-            this.gameScores.forEach(i -> i.setGame(null));
-        }
-        if (gameScores != null) {
-            gameScores.forEach(i -> i.setGame(this));
-        }
-        this.gameScores = gameScores;
-    }
-
-    public Game gameScores(Set<GameScore> gameScores) {
-        this.setGameScores(gameScores);
-        return this;
-    }
-
-    public Game addGameScore(GameScore gameScore) {
-        this.gameScores.add(gameScore);
-        gameScore.setGame(this);
-        return this;
-    }
-
-    public Game removeGameScore(GameScore gameScore) {
-        this.gameScores.remove(gameScore);
-        gameScore.setGame(null);
-        return this;
-    }
-
-    public Set<HighScore> getHighScores() {
-        return this.highScores;
-    }
-
-    public void setHighScores(Set<HighScore> highScores) {
-        if (this.highScores != null) {
-            this.highScores.forEach(i -> i.setGame(null));
-        }
-        if (highScores != null) {
-            highScores.forEach(i -> i.setGame(this));
-        }
-        this.highScores = highScores;
-    }
-
-    public Game highScores(Set<HighScore> highScores) {
-        this.setHighScores(highScores);
-        return this;
-    }
-
-    public Game addHighScore(HighScore highScore) {
-        this.highScores.add(highScore);
-        highScore.setGame(this);
-        return this;
-    }
-
-    public Game removeHighScore(HighScore highScore) {
-        this.highScores.remove(highScore);
-        highScore.setGame(null);
-        return this;
     }
 
     public Set<GameBadge> getGameBadges() {
@@ -242,6 +147,68 @@ public class Game implements Serializable {
         return this;
     }
 
+    public Set<GameScore> getGameScores() {
+        return this.gameScores;
+    }
+
+    public void setGameScores(Set<GameScore> gameScores) {
+        if (this.gameScores != null) {
+            this.gameScores.forEach(i -> i.setGame(null));
+        }
+        if (gameScores != null) {
+            gameScores.forEach(i -> i.setGame(this));
+        }
+        this.gameScores = gameScores;
+    }
+
+    public Game gameScores(Set<GameScore> gameScores) {
+        this.setGameScores(gameScores);
+        return this;
+    }
+
+    public Game addGameScore(GameScore gameScore) {
+        this.gameScores.add(gameScore);
+        gameScore.setGame(this);
+        return this;
+    }
+
+    public Game removeGameScore(GameScore gameScore) {
+        this.gameScores.remove(gameScore);
+        gameScore.setGame(null);
+        return this;
+    }
+
+    public Set<HighScore> getHighScores() {
+        return this.highScores;
+    }
+
+    public void setHighScores(Set<HighScore> highScores) {
+        if (this.highScores != null) {
+            this.highScores.forEach(i -> i.setGame(null));
+        }
+        if (highScores != null) {
+            highScores.forEach(i -> i.setGame(this));
+        }
+        this.highScores = highScores;
+    }
+
+    public Game highScores(Set<HighScore> highScores) {
+        this.setHighScores(highScores);
+        return this;
+    }
+
+    public Game addHighScore(HighScore highScore) {
+        this.highScores.add(highScore);
+        highScore.setGame(this);
+        return this;
+    }
+
+    public Game removeHighScore(HighScore highScore) {
+        this.highScores.remove(highScore);
+        highScore.setGame(null);
+        return this;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -266,8 +233,6 @@ public class Game implements Serializable {
     public String toString() {
         return "Game{" +
             "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", title='" + getTitle() + "'" +
             ", url='" + getUrl() + "'" +
             ", logoUrl='" + getLogoUrl() + "'" +
             "}";

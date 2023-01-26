@@ -32,12 +32,12 @@ public class NftReward implements Serializable {
     private String imageUrl;
 
     @OneToMany(mappedBy = "nftReward")
-    @JsonIgnoreProperties(value = { "player", "nftReward" }, allowSetters = true)
-    private Set<PlayerNftReward> playerNftRewards = new HashSet<>();
-
-    @OneToMany(mappedBy = "nftReward")
     @JsonIgnoreProperties(value = { "couponReward", "nftReward" }, allowSetters = true)
     private Set<DailyReward> dailyRewards = new HashSet<>();
+
+    @OneToMany(mappedBy = "nftReward")
+    @JsonIgnoreProperties(value = { "player", "nftReward" }, allowSetters = true)
+    private Set<PlayerNftReward> playerNftRewards = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -93,37 +93,6 @@ public class NftReward implements Serializable {
         this.imageUrl = imageUrl;
     }
 
-    public Set<PlayerNftReward> getPlayerNftRewards() {
-        return this.playerNftRewards;
-    }
-
-    public void setPlayerNftRewards(Set<PlayerNftReward> playerNftRewards) {
-        if (this.playerNftRewards != null) {
-            this.playerNftRewards.forEach(i -> i.setNftReward(null));
-        }
-        if (playerNftRewards != null) {
-            playerNftRewards.forEach(i -> i.setNftReward(this));
-        }
-        this.playerNftRewards = playerNftRewards;
-    }
-
-    public NftReward playerNftRewards(Set<PlayerNftReward> playerNftRewards) {
-        this.setPlayerNftRewards(playerNftRewards);
-        return this;
-    }
-
-    public NftReward addPlayerNftReward(PlayerNftReward playerNftReward) {
-        this.playerNftRewards.add(playerNftReward);
-        playerNftReward.setNftReward(this);
-        return this;
-    }
-
-    public NftReward removePlayerNftReward(PlayerNftReward playerNftReward) {
-        this.playerNftRewards.remove(playerNftReward);
-        playerNftReward.setNftReward(null);
-        return this;
-    }
-
     public Set<DailyReward> getDailyRewards() {
         return this.dailyRewards;
     }
@@ -152,6 +121,37 @@ public class NftReward implements Serializable {
     public NftReward removeDailyReward(DailyReward dailyReward) {
         this.dailyRewards.remove(dailyReward);
         dailyReward.setNftReward(null);
+        return this;
+    }
+
+    public Set<PlayerNftReward> getPlayerNftRewards() {
+        return this.playerNftRewards;
+    }
+
+    public void setPlayerNftRewards(Set<PlayerNftReward> playerNftRewards) {
+        if (this.playerNftRewards != null) {
+            this.playerNftRewards.forEach(i -> i.setNftReward(null));
+        }
+        if (playerNftRewards != null) {
+            playerNftRewards.forEach(i -> i.setNftReward(this));
+        }
+        this.playerNftRewards = playerNftRewards;
+    }
+
+    public NftReward playerNftRewards(Set<PlayerNftReward> playerNftRewards) {
+        this.setPlayerNftRewards(playerNftRewards);
+        return this;
+    }
+
+    public NftReward addPlayerNftReward(PlayerNftReward playerNftReward) {
+        this.playerNftRewards.add(playerNftReward);
+        playerNftReward.setNftReward(this);
+        return this;
+    }
+
+    public NftReward removePlayerNftReward(PlayerNftReward playerNftReward) {
+        this.playerNftRewards.remove(playerNftReward);
+        playerNftReward.setNftReward(null);
         return this;
     }
 

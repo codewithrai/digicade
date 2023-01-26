@@ -14,7 +14,6 @@ import { GameBadgeDeleteDialogComponent } from '../delete/game-badge-delete-dial
 @Component({
   selector: 'jhi-game-badge',
   templateUrl: './game-badge.component.html',
-  styleUrls: ['./game-badge.component.css'],
 })
 export class GameBadgeComponent implements OnInit {
   gameBadges?: IGameBadge[];

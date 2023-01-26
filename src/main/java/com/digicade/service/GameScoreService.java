@@ -1,12 +1,7 @@
 package com.digicade.service;
 
-import com.digicade.domain.GameScore;
 import com.digicade.service.dto.GameScoreDTO;
-
-import java.util.List;
 import java.util.Optional;
-
-import com.digicade.service.dto.UserGameStatsDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -60,6 +55,4 @@ public interface GameScoreService {
      * @param id the id of the entity.
      */
     void delete(Long id);
-
-    List<UserGameStatsDTO> getUserGameStatsByPlayerId(Long playerId);
 }

@@ -1,5 +1,5 @@
 {
-  "applications": "*",
+  "applications": ["digicade"],
   "changelogDate": "20221221095521",
   "dto": "mapstruct",
   "embedded": false,
@@ -39,15 +39,15 @@
       "relationshipType": "one-to-many"
     },
     {
-      "otherEntityName": "playerCouponReward",
-      "otherEntityRelationshipName": "couponReward",
-      "relationshipName": "playerCouponReward",
-      "relationshipType": "one-to-many"
-    },
-    {
       "otherEntityName": "dailyReward",
       "otherEntityRelationshipName": "couponReward",
       "relationshipName": "dailyReward",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "playerCouponReward",
+      "otherEntityRelationshipName": "couponReward",
+      "relationshipName": "playerCouponReward",
       "relationshipType": "one-to-many"
     }
   ],

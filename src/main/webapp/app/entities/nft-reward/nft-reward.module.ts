@@ -8,11 +8,6 @@ import { NftRewardRoutingModule } from './route/nft-reward-routing.module';
 
 @NgModule({
   imports: [SharedModule, NftRewardRoutingModule],
-  declarations: [
-    // NftRewardComponent,
-    // NftRewardDetailComponent,
-    // NftRewardUpdateComponent,
-    // NftRewardDeleteDialogComponent
-  ],
+  declarations: [NftRewardComponent, NftRewardDetailComponent, NftRewardUpdateComponent, NftRewardDeleteDialogComponent],
 })
 export class NftRewardModule {}

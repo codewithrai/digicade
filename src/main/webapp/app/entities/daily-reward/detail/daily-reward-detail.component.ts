@@ -6,7 +6,6 @@ import { IDailyReward } from '../daily-reward.model';
 @Component({
   selector: 'jhi-daily-reward-detail',
   templateUrl: './daily-reward-detail.component.html',
-  styleUrls: ['./daily-reward-detail.component.css'],
 })
 export class DailyRewardDetailComponent implements OnInit {
   dailyReward: IDailyReward | null = null;

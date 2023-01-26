@@ -18,7 +18,6 @@ type GameBadgeFormDefaults = Pick<NewGameBadge, 'id'>;
 
 type GameBadgeFormGroupContent = {
   id: FormControl<IGameBadge['id'] | NewGameBadge['id']>;
-  xp: FormControl<IGameBadge['xp']>;
   logoUrl: FormControl<IGameBadge['logoUrl']>;
   game: FormControl<IGameBadge['game']>;
   player: FormControl<IGameBadge['player']>;
@@ -41,7 +40,6 @@ export class GameBadgeFormService {
           validators: [Validators.required],
         }
       ),
-      xp: new FormControl(gameBadgeRawValue.xp),
       logoUrl: new FormControl(gameBadgeRawValue.logoUrl),
       game: new FormControl(gameBadgeRawValue.game),
       player: new FormControl(gameBadgeRawValue.player),

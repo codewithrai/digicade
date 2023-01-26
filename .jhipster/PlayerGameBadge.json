@@ -1,0 +1,28 @@
+{
+  "applications": ["digicade"],
+  "changelogDate": "20230126083057",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "player_game_badge",
+  "fields": [],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "PlayerGameBadge",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "gameBadge",
+      "otherEntityRelationshipName": "playerGameBadge",
+      "relationshipName": "gameBadge",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "player",
+      "otherEntityRelationshipName": "playerGameBadge",
+      "relationshipName": "player",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

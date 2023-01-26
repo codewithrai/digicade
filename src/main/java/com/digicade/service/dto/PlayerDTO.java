@@ -19,8 +19,6 @@ public class PlayerDTO implements Serializable {
 
     private Integer level;
 
-    private Integer xp;
-
     private String walletAddress;
 
     public Long getId() {
@@ -63,14 +61,6 @@ public class PlayerDTO implements Serializable {
         this.level = level;
     }
 
-    public Integer getXp() {
-        return xp;
-    }
-
-    public void setXp(Integer xp) {
-        this.xp = xp;
-    }
-
     public String getWalletAddress() {
         return walletAddress;
     }
@@ -109,7 +99,6 @@ public class PlayerDTO implements Serializable {
             ", tix=" + getTix() +
             ", comp=" + getComp() +
             ", level=" + getLevel() +
-            ", xp=" + getXp() +
             ", walletAddress='" + getWalletAddress() + "'" +
             "}";
     }

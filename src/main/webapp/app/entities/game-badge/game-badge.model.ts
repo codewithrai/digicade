@@ -3,7 +3,6 @@ import { IPlayer } from 'app/entities/player/player.model';
 
 export interface IGameBadge {
   id: number;
-  xp: number | null | undefined;
   logoUrl?: string | null;
   game?: Pick<IGame, 'id'> | null;
   player?: Pick<IPlayer, 'id'> | null;

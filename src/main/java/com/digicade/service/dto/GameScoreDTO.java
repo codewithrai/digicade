@@ -16,10 +16,6 @@ public class GameScoreDTO implements Serializable {
 
     private LocalDate date;
 
-    private Long won;
-
-    private Long lost;
-
     private GameDTO game;
 
     private PlayerDTO player;
@@ -54,22 +50,6 @@ public class GameScoreDTO implements Serializable {
 
     public void setGame(GameDTO game) {
         this.game = game;
-    }
-
-    public Long getWon() {
-        return won;
-    }
-
-    public void setWon(Long won) {
-        this.won = won;
-    }
-
-    public Long getLost() {
-        return lost;
-    }
-
-    public void setLost(Long lost) {
-        this.lost = lost;
     }
 
     public PlayerDTO getPlayer() {

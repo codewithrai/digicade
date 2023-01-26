@@ -1,22 +1,13 @@
 package com.digicade.service.impl;
 
 import com.digicade.domain.GameScore;
-import com.digicade.domain.HighScore;
 import com.digicade.repository.GameScoreRepository;
-import com.digicade.repository.HighScoreRepository;
-import com.digicade.service.GameLevelService;
 import com.digicade.service.GameScoreService;
-import com.digicade.service.dto.GameLevelDTO;
 import com.digicade.service.dto.GameScoreDTO;
-import com.digicade.service.dto.UserGameStatsDTO;
 import com.digicade.service.mapper.GameScoreMapper;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -35,12 +26,6 @@ public class GameScoreServiceImpl implements GameScoreService {
 
     private final GameScoreMapper gameScoreMapper;
 
-    @Autowired
-    private HighScoreRepository highScoreRepository;
-
-    @Autowired
-    private GameLevelService gameLevelService;
-
     public GameScoreServiceImpl(GameScoreRepository gameScoreRepository, GameScoreMapper gameScoreMapper) {
         this.gameScoreRepository = gameScoreRepository;
         this.gameScoreMapper = gameScoreMapper;
@@ -50,29 +35,6 @@ public class GameScoreServiceImpl implements GameScoreService {
     public GameScoreDTO save(GameScoreDTO gameScoreDTO) {
         log.debug("Request to save GameScore : {}", gameScoreDTO);
         GameScore gameScore = gameScoreMapper.toEntity(gameScoreDTO);
-
-        Optional<HighScore> highScoreOptional = highScoreRepository.findByGameIdAndPlayerId(
-            gameScoreDTO.getGame().getId(),
-            gameScoreDTO.getPlayer().getId()
-        );
-
-        // save high score
-        if (highScoreOptional.isPresent()) {
-            HighScore highScore = highScoreOptional.get();
-            if (gameScoreDTO.getScore() > highScore.getHighestScore()) {
-                highScore.setHighestScore(gameScoreDTO.getScore());
-                HighScore save = highScoreRepository.save(highScore);
-            }
-        } else {
-            HighScore highScore = new HighScore();
-            highScore.setGame(gameScore.getGame());
-            highScore.setPlayer(gameScore.getPlayer());
-            highScore.setHighestScore(gameScore.getScore());
-            HighScore save = highScoreRepository.save(highScore);
-        }
-
-        gameScore.setDate(LocalDate.now());
-
         gameScore = gameScoreRepository.save(gameScore);
         return gameScoreMapper.toDto(gameScore);
     }
@@ -118,11 +80,5 @@ public class GameScoreServiceImpl implements GameScoreService {
     public void delete(Long id) {
         log.debug("Request to delete GameScore : {}", id);
         gameScoreRepository.deleteById(id);
-    }
-
-    @Override
-    public List<UserGameStatsDTO> getUserGameStatsByPlayerId(Long playerId) {
-        List<UserGameStatsDTO> gameStatsDTOS = gameScoreRepository.findGameScoreByPlayerIdOrderByScoreDesc(playerId);
-        return gameStatsDTOS;
     }
 }

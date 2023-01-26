@@ -1,7 +1,6 @@
 package com.digicade.repository;
 
 import com.digicade.domain.PlayerNftReward;
-import java.util.Optional;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +9,4 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface PlayerNftRewardRepository extends JpaRepository<PlayerNftReward, Long> {
-    Optional<PlayerNftReward> findByPlayerId(Long id);
-}
+public interface PlayerNftRewardRepository extends JpaRepository<PlayerNftReward, Long> {}

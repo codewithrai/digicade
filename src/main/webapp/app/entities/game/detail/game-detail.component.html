@@ -1,56 +1,36 @@
-<jhi-navbar></jhi-navbar>
-<div class="game-details-main">
-  <div class="sidebar">
-    <jhi-sidebar></jhi-sidebar>
-  </div>
-  <div class="game-details">
-    <div class="d-flex justify-content-center">
-      <div class="col-8">
-        <div *ngIf="game">
-          <h2 data-cy="gameDetailsHeading"><span>Game</span></h2>
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="game">
+      <h2 data-cy="gameDetailsHeading"><span>Game</span></h2>
 
-          <hr />
+      <hr />
 
-          <jhi-alert-error></jhi-alert-error>
+      <jhi-alert-error></jhi-alert-error>
 
-          <jhi-alert></jhi-alert>
+      <jhi-alert></jhi-alert>
 
-          <dl class="row-md jh-entity-details">
-            <dt><span>ID</span></dt>
-            <dd>
-              <span>{{ game.id }}</span>
-            </dd>
-            <dt><span>Name</span></dt>
-            <dd>
-              <span>{{ game.name }}</span>
-            </dd>
-            <dt><span>Title</span></dt>
-            <dd>
-              <span>{{ game.title }}</span>
-            </dd>
-            <dt><span>Image</span></dt>
-            <dd>
-              <span><img width="40" height="40" src="{{ game.image }}" /></span>
-            </dd>
-            <dt><span>Url</span></dt>
-            <dd>
-              <span>{{ game.url }}</span>
-            </dd>
-            <dt><span>Logo Url</span></dt>
-            <dd>
-              <span>{{ game.logoUrl }}</span>
-            </dd>
-          </dl>
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ game.id }}</span>
+        </dd>
+        <dt><span>Url</span></dt>
+        <dd>
+          <span>{{ game.url }}</span>
+        </dd>
+        <dt><span>Logo Url</span></dt>
+        <dd>
+          <span>{{ game.logoUrl }}</span>
+        </dd>
+      </dl>
 
-          <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-            <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
-          </button>
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
 
-          <button type="button" [routerLink]="['/game', game.id, 'edit']" class="btn btn-primary">
-            <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
-          </button>
-        </div>
-      </div>
+      <button type="button" [routerLink]="['/game', game.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
     </div>
   </div>
 </div>

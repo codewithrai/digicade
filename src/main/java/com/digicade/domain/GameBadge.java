@@ -2,6 +2,8 @@ package com.digicade.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 
 /**
@@ -9,7 +11,6 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "game_badge")
-@JsonIgnoreProperties(value = { "player" })
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class GameBadge implements Serializable {
 
@@ -24,17 +25,26 @@ public class GameBadge implements Serializable {
     @Column(name = "logo_url")
     private String logoUrl;
 
-    @Column(name = "xp")
-    private Integer xp;
+    @OneToMany(mappedBy = "gameBadge")
+    @JsonIgnoreProperties(value = { "gameBadge", "player" }, allowSetters = true)
+    private Set<PlayerGameBadge> playerGameBadges = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "gameScores", "highScores", "gameBadges", "gameLevels" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "gameBadges", "gameLevels", "gameScores", "highScores" }, allowSetters = true)
     private Game game;
 
     @ManyToOne
     @JsonIgnoreProperties(
         value = {
-            "gameScores", "highScores", "gameLevels", "gameBadges", "transactions", "playerCouponRewards", "playerNftRewards", "digiUser",
+            "gameBadges",
+            "playerGameBadges",
+            "gameLevels",
+            "gameScores",
+            "highScores",
+            "playerCouponRewards",
+            "playerNftRewards",
+            "transactions",
+            "digiUser",
         },
         allowSetters = true
     )
@@ -68,12 +78,35 @@ public class GameBadge implements Serializable {
         this.logoUrl = logoUrl;
     }
 
-    public Integer getXp() {
-        return xp;
+    public Set<PlayerGameBadge> getPlayerGameBadges() {
+        return this.playerGameBadges;
     }
 
-    public void setXp(Integer xp) {
-        this.xp = xp;
+    public void setPlayerGameBadges(Set<PlayerGameBadge> playerGameBadges) {
+        if (this.playerGameBadges != null) {
+            this.playerGameBadges.forEach(i -> i.setGameBadge(null));
+        }
+        if (playerGameBadges != null) {
+            playerGameBadges.forEach(i -> i.setGameBadge(this));
+        }
+        this.playerGameBadges = playerGameBadges;
+    }
+
+    public GameBadge playerGameBadges(Set<PlayerGameBadge> playerGameBadges) {
+        this.setPlayerGameBadges(playerGameBadges);
+        return this;
+    }
+
+    public GameBadge addPlayerGameBadge(PlayerGameBadge playerGameBadge) {
+        this.playerGameBadges.add(playerGameBadge);
+        playerGameBadge.setGameBadge(this);
+        return this;
+    }
+
+    public GameBadge removePlayerGameBadge(PlayerGameBadge playerGameBadge) {
+        this.playerGameBadges.remove(playerGameBadge);
+        playerGameBadge.setGameBadge(null);
+        return this;
     }
 
     public Game getGame() {

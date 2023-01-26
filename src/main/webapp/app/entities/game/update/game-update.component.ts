@@ -11,13 +11,10 @@ import { GameService } from '../service/game.service';
 @Component({
   selector: 'jhi-game-update',
   templateUrl: './game-update.component.html',
-  styleUrls: ['./game-update.component.css'],
 })
 export class GameUpdateComponent implements OnInit {
   isSaving = false;
   game: IGame | null = null;
-  base64Code?: any;
-  file?: any;
 
   editForm: GameFormGroup = this.gameFormService.createGameFormGroup();
 
@@ -68,24 +65,5 @@ export class GameUpdateComponent implements OnInit {
   protected updateForm(game: IGame): void {
     this.game = game;
     this.gameFormService.resetForm(this.editForm, game);
-  }
-
-  uploadImage(e: any): void {
-    this.getBase64String(e);
-  }
-
-  getBase64String(event: any) {
-    if (event.target.files && event.target.files[0]) {
-      if (event.target.files[0].type) {
-        this.file = event.target.files[0];
-        var reader = new FileReader();
-        reader.onload = (event: any) => {
-          this.base64Code = event.target.result;
-          this.editForm.get('image')?.setValue(event.target.result);
-          this.editForm.value.image = event.target.result;
-        };
-        reader.readAsDataURL(event.target.files[0]);
-      }
-    }
   }
 }

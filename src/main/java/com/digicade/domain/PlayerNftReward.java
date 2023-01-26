@@ -27,14 +27,22 @@ public class PlayerNftReward implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties(
         value = {
-            "gameScores", "highScores", "gameLevels", "gameBadges", "transactions", "playerCouponRewards", "playerNftRewards", "digiUser",
+            "gameBadges",
+            "playerGameBadges",
+            "gameLevels",
+            "gameScores",
+            "highScores",
+            "playerCouponRewards",
+            "playerNftRewards",
+            "transactions",
+            "digiUser",
         },
         allowSetters = true
     )
     private Player player;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "playerNftRewards", "dailyRewards" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "dailyRewards", "playerNftRewards" }, allowSetters = true)
     private NftReward nftReward;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

@@ -11,7 +11,6 @@ import { NftRewardService } from '../service/nft-reward.service';
 @Component({
   selector: 'jhi-nft-reward-update',
   templateUrl: './nft-reward-update.component.html',
-  styleUrls: ['./nft-reward-update.component.css'],
 })
 export class NftRewardUpdateComponent implements OnInit {
   isSaving = false;

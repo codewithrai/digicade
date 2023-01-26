@@ -1,7 +1,6 @@
 package com.digicade.service.impl;
 
 import com.digicade.domain.PlayerNftReward;
-import com.digicade.exceptions.UserNotFoundCustomException;
 import com.digicade.repository.PlayerNftRewardRepository;
 import com.digicade.service.PlayerNftRewardService;
 import com.digicade.service.dto.PlayerNftRewardDTO;
@@ -81,18 +80,5 @@ public class PlayerNftRewardServiceImpl implements PlayerNftRewardService {
     public void delete(Long id) {
         log.debug("Request to delete PlayerNftReward : {}", id);
         playerNftRewardRepository.deleteById(id);
-    }
-
-    @Override
-    public PlayerNftRewardDTO getPlayerNftRewardByPlayerId(Long playerId) throws Exception {
-        Optional<PlayerNftRewardDTO> optional = playerNftRewardRepository.findByPlayerId(playerId).map(playerNftRewardMapper::toDto);
-
-        if (!optional.isPresent()) {
-            throw new UserNotFoundCustomException("Player NFT Reward not found with player id: " + playerId);
-        }
-
-        PlayerNftRewardDTO playerNftRewardDTO = optional.get();
-
-        return playerNftRewardDTO;
     }
 }

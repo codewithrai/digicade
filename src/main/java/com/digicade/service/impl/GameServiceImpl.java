@@ -5,10 +5,7 @@ import com.digicade.repository.GameRepository;
 import com.digicade.service.GameService;
 import com.digicade.service.dto.GameDTO;
 import com.digicade.service.mapper.GameMapper;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -70,16 +67,6 @@ public class GameServiceImpl implements GameService {
     public Page<GameDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Games");
         return gameRepository.findAll(pageable).map(gameMapper::toDto);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<GameDTO> findAllGames() {
-        Optional<List<GameDTO>> optional = gameRepository.findAllGames().map(gameMapper::toDto);
-        log.debug("Request to get all Game {}", optional);
-        log.debug("Request to get all Games Size {}", optional.get().size());
-
-        return optional.get();
     }
 
     @Override

@@ -9,6 +9,5 @@ import { DigiUserRoutingModule } from './route/digi-user-routing.module';
 @NgModule({
   imports: [SharedModule, DigiUserRoutingModule],
   declarations: [DigiUserComponent, DigiUserDetailComponent, DigiUserUpdateComponent, DigiUserDeleteDialogComponent],
-  exports: [DigiUserComponent],
 })
 export class DigiUserModule {}

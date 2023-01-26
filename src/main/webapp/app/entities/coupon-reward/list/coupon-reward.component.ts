@@ -14,7 +14,6 @@ import { CouponRewardDeleteDialogComponent } from '../delete/coupon-reward-delet
 @Component({
   selector: 'jhi-coupon-reward',
   templateUrl: './coupon-reward.component.html',
-  styleUrls: ['./coupon-reward.component.css'],
 })
 export class CouponRewardComponent implements OnInit {
   couponRewards?: ICouponReward[];

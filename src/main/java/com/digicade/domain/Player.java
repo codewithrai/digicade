@@ -34,47 +34,44 @@ public class Player implements Serializable {
     @Column(name = "level")
     private Integer level;
 
-    @Column(name = "xp")
-    private Integer xp;
-
     @Column(name = "wallet_address")
     private String walletAddress;
 
-    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties(value = { "game", "player" }, allowSetters = true)
-    private Set<GameScore> gameScores = new HashSet<>();
+    @OneToMany(mappedBy = "player")
+    @JsonIgnoreProperties(value = { "playerGameBadges", "game", "player" }, allowSetters = true)
+    private Set<GameBadge> gameBadges = new HashSet<>();
 
-    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties(value = { "game", "player" }, allowSetters = true)
-    private Set<HighScore> highScores = new HashSet<>();
+    @OneToMany(mappedBy = "player")
+    @JsonIgnoreProperties(value = { "gameBadge", "player" }, allowSetters = true)
+    private Set<PlayerGameBadge> playerGameBadges = new HashSet<>();
 
-    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "player")
     @JsonIgnoreProperties(value = { "player", "game" }, allowSetters = true)
     private Set<GameLevel> gameLevels = new HashSet<>();
 
-    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "player")
     @JsonIgnoreProperties(value = { "game", "player" }, allowSetters = true)
-    private Set<GameBadge> gameBadges = new HashSet<>();
+    private Set<GameScore> gameScores = new HashSet<>();
 
-    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties(value = { "player", "coinPackage" }, allowSetters = true)
-    private Set<Transaction> transactions = new HashSet<>();
+    @OneToMany(mappedBy = "player")
+    @JsonIgnoreProperties(value = { "game", "player" }, allowSetters = true)
+    private Set<HighScore> highScores = new HashSet<>();
 
-    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "player")
     @JsonIgnoreProperties(value = { "player", "couponReward" }, allowSetters = true)
     private Set<PlayerCouponReward> playerCouponRewards = new HashSet<>();
 
-    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "player")
     @JsonIgnoreProperties(value = { "player", "nftReward" }, allowSetters = true)
     private Set<PlayerNftReward> playerNftRewards = new HashSet<>();
+
+    @OneToMany(mappedBy = "player")
+    @JsonIgnoreProperties(value = { "player", "coinPackage" }, allowSetters = true)
+    private Set<Transaction> transactions = new HashSet<>();
 
     @JsonIgnoreProperties(value = { "player" }, allowSetters = true)
     @OneToOne(mappedBy = "player")
     private DigiUser digiUser;
-
-    @JsonIgnoreProperties(value = { "player" }, allowSetters = true)
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "player")
-    private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -143,14 +140,6 @@ public class Player implements Serializable {
         this.level = level;
     }
 
-    public Integer getXp() {
-        return xp;
-    }
-
-    public void setXp(Integer xp) {
-        this.xp = xp;
-    }
-
     public String getWalletAddress() {
         return this.walletAddress;
     }
@@ -162,6 +151,99 @@ public class Player implements Serializable {
 
     public void setWalletAddress(String walletAddress) {
         this.walletAddress = walletAddress;
+    }
+
+    public Set<GameBadge> getGameBadges() {
+        return this.gameBadges;
+    }
+
+    public void setGameBadges(Set<GameBadge> gameBadges) {
+        if (this.gameBadges != null) {
+            this.gameBadges.forEach(i -> i.setPlayer(null));
+        }
+        if (gameBadges != null) {
+            gameBadges.forEach(i -> i.setPlayer(this));
+        }
+        this.gameBadges = gameBadges;
+    }
+
+    public Player gameBadges(Set<GameBadge> gameBadges) {
+        this.setGameBadges(gameBadges);
+        return this;
+    }
+
+    public Player addGameBadge(GameBadge gameBadge) {
+        this.gameBadges.add(gameBadge);
+        gameBadge.setPlayer(this);
+        return this;
+    }
+
+    public Player removeGameBadge(GameBadge gameBadge) {
+        this.gameBadges.remove(gameBadge);
+        gameBadge.setPlayer(null);
+        return this;
+    }
+
+    public Set<PlayerGameBadge> getPlayerGameBadges() {
+        return this.playerGameBadges;
+    }
+
+    public void setPlayerGameBadges(Set<PlayerGameBadge> playerGameBadges) {
+        if (this.playerGameBadges != null) {
+            this.playerGameBadges.forEach(i -> i.setPlayer(null));
+        }
+        if (playerGameBadges != null) {
+            playerGameBadges.forEach(i -> i.setPlayer(this));
+        }
+        this.playerGameBadges = playerGameBadges;
+    }
+
+    public Player playerGameBadges(Set<PlayerGameBadge> playerGameBadges) {
+        this.setPlayerGameBadges(playerGameBadges);
+        return this;
+    }
+
+    public Player addPlayerGameBadge(PlayerGameBadge playerGameBadge) {
+        this.playerGameBadges.add(playerGameBadge);
+        playerGameBadge.setPlayer(this);
+        return this;
+    }
+
+    public Player removePlayerGameBadge(PlayerGameBadge playerGameBadge) {
+        this.playerGameBadges.remove(playerGameBadge);
+        playerGameBadge.setPlayer(null);
+        return this;
+    }
+
+    public Set<GameLevel> getGameLevels() {
+        return this.gameLevels;
+    }
+
+    public void setGameLevels(Set<GameLevel> gameLevels) {
+        if (this.gameLevels != null) {
+            this.gameLevels.forEach(i -> i.setPlayer(null));
+        }
+        if (gameLevels != null) {
+            gameLevels.forEach(i -> i.setPlayer(this));
+        }
+        this.gameLevels = gameLevels;
+    }
+
+    public Player gameLevels(Set<GameLevel> gameLevels) {
+        this.setGameLevels(gameLevels);
+        return this;
+    }
+
+    public Player addGameLevel(GameLevel gameLevel) {
+        this.gameLevels.add(gameLevel);
+        gameLevel.setPlayer(this);
+        return this;
+    }
+
+    public Player removeGameLevel(GameLevel gameLevel) {
+        this.gameLevels.remove(gameLevel);
+        gameLevel.setPlayer(null);
+        return this;
     }
 
     public Set<GameScore> getGameScores() {
@@ -223,99 +305,6 @@ public class Player implements Serializable {
     public Player removeHighScore(HighScore highScore) {
         this.highScores.remove(highScore);
         highScore.setPlayer(null);
-        return this;
-    }
-
-    public Set<GameLevel> getGameLevels() {
-        return this.gameLevels;
-    }
-
-    public void setGameLevels(Set<GameLevel> gameLevels) {
-        if (this.gameLevels != null) {
-            this.gameLevels.forEach(i -> i.setPlayer(null));
-        }
-        if (gameLevels != null) {
-            gameLevels.forEach(i -> i.setPlayer(this));
-        }
-        this.gameLevels = gameLevels;
-    }
-
-    public Player gameLevels(Set<GameLevel> gameLevels) {
-        this.setGameLevels(gameLevels);
-        return this;
-    }
-
-    public Player addGameLevel(GameLevel gameLevel) {
-        this.gameLevels.add(gameLevel);
-        gameLevel.setPlayer(this);
-        return this;
-    }
-
-    public Player removeGameLevel(GameLevel gameLevel) {
-        this.gameLevels.remove(gameLevel);
-        gameLevel.setPlayer(null);
-        return this;
-    }
-
-    public Set<GameBadge> getGameBadges() {
-        return this.gameBadges;
-    }
-
-    public void setGameBadges(Set<GameBadge> gameBadges) {
-        if (this.gameBadges != null) {
-            this.gameBadges.forEach(i -> i.setPlayer(null));
-        }
-        if (gameBadges != null) {
-            gameBadges.forEach(i -> i.setPlayer(this));
-        }
-        this.gameBadges = gameBadges;
-    }
-
-    public Player gameBadges(Set<GameBadge> gameBadges) {
-        this.setGameBadges(gameBadges);
-        return this;
-    }
-
-    public Player addGameBadge(GameBadge gameBadge) {
-        this.gameBadges.add(gameBadge);
-        gameBadge.setPlayer(this);
-        return this;
-    }
-
-    public Player removeGameBadge(GameBadge gameBadge) {
-        this.gameBadges.remove(gameBadge);
-        gameBadge.setPlayer(null);
-        return this;
-    }
-
-    public Set<Transaction> getTransactions() {
-        return this.transactions;
-    }
-
-    public void setTransactions(Set<Transaction> transactions) {
-        if (this.transactions != null) {
-            this.transactions.forEach(i -> i.setPlayer(null));
-        }
-        if (transactions != null) {
-            transactions.forEach(i -> i.setPlayer(this));
-        }
-        this.transactions = transactions;
-    }
-
-    public Player transactions(Set<Transaction> transactions) {
-        this.setTransactions(transactions);
-        return this;
-    }
-
-    public Player addTransaction(Transaction transaction) {
-        this.transactions.add(transaction);
-        transaction.setPlayer(this);
-        return this;
-    }
-
-    public Player removeTransaction(Transaction transaction) {
-        this.transactions.remove(transaction);
-        transaction.setPlayer(null);
         return this;
     }
 
@@ -381,6 +370,37 @@ public class Player implements Serializable {
         return this;
     }
 
+    public Set<Transaction> getTransactions() {
+        return this.transactions;
+    }
+
+    public void setTransactions(Set<Transaction> transactions) {
+        if (this.transactions != null) {
+            this.transactions.forEach(i -> i.setPlayer(null));
+        }
+        if (transactions != null) {
+            transactions.forEach(i -> i.setPlayer(this));
+        }
+        this.transactions = transactions;
+    }
+
+    public Player transactions(Set<Transaction> transactions) {
+        this.setTransactions(transactions);
+        return this;
+    }
+
+    public Player addTransaction(Transaction transaction) {
+        this.transactions.add(transaction);
+        transaction.setPlayer(this);
+        return this;
+    }
+
+    public Player removeTransaction(Transaction transaction) {
+        this.transactions.remove(transaction);
+        transaction.setPlayer(null);
+        return this;
+    }
+
     public DigiUser getDigiUser() {
         return this.digiUser;
     }
@@ -398,14 +418,6 @@ public class Player implements Serializable {
     public Player digiUser(DigiUser digiUser) {
         this.setDigiUser(digiUser);
         return this;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -437,7 +449,6 @@ public class Player implements Serializable {
             ", comp=" + getComp() +
             ", level=" + getLevel() +
             ", walletAddress='" + getWalletAddress() + "'" +
-            ", user='" + getUser() + "'" +
             "}";
     }
 }

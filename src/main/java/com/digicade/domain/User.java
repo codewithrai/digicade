@@ -2,7 +2,6 @@ package com.digicade.domain;
 
 import com.digicade.config.Constants;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -89,13 +88,6 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
     )
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();
-
-    //"gameScores", "highScores", "gameLevels", "gameBadges",
-    @JsonIgnoreProperties(value = { "user", "transactions", "playerCouponRewards", "playerNftRewards", "digiUser" }, allowSetters = true)
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "id")
-    private Player player;
 
     public Long getId() {
         return id;
@@ -200,14 +192,6 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
     }
 
     @Override

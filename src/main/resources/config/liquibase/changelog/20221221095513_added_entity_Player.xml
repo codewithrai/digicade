@@ -26,9 +26,6 @@
             <column name="level" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="xp" type="integer">
-                <constraints nullable="true" />
-            </column>
             <column name="wallet_address" type="varchar(255)">
                 <constraints nullable="true" />
             </column>

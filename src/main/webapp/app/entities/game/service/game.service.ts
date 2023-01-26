@@ -39,10 +39,6 @@ export class GameService {
     return this.http.get<IGame[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
-  get(): Observable<EntityArrayResponseType> {
-    return this.http.get<IGame[]>('all-games', { observe: 'response' });
-  }
-
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }

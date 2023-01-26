@@ -1,9 +1,7 @@
 package com.digicade.service.impl;
 
 import com.digicade.domain.DigiUser;
-import com.digicade.domain.Player;
 import com.digicade.repository.DigiUserRepository;
-import com.digicade.repository.PlayerRepository;
 import com.digicade.service.DigiUserService;
 import com.digicade.service.dto.DigiUserDTO;
 import com.digicade.service.mapper.DigiUserMapper;
@@ -28,24 +26,15 @@ public class DigiUserServiceImpl implements DigiUserService {
 
     private final DigiUserMapper digiUserMapper;
 
-    private final PlayerRepository playerRepository;
-
-    public DigiUserServiceImpl(DigiUserRepository digiUserRepository, DigiUserMapper digiUserMapper, PlayerRepository playerRepository) {
+    public DigiUserServiceImpl(DigiUserRepository digiUserRepository, DigiUserMapper digiUserMapper) {
         this.digiUserRepository = digiUserRepository;
         this.digiUserMapper = digiUserMapper;
-        this.playerRepository = playerRepository;
     }
 
     @Override
     public DigiUserDTO save(DigiUserDTO digiUserDTO) {
         log.debug("Request to save DigiUser : {}", digiUserDTO);
         DigiUser digiUser = digiUserMapper.toEntity(digiUserDTO);
-//        Long playerId = digiUserDTO.getPlayer().getId();
-//        playerRepository.findById(playerId).ifPresent(digiUser::player);
-        Player player = new Player();
-        Player savedPlayer = playerRepository.save(player);
-        Long playerId = savedPlayer.getId();
-        playerRepository.findById(playerId).ifPresent(digiUser::player);
         digiUser = digiUserRepository.save(digiUser);
         return digiUserMapper.toDto(digiUser);
     }
@@ -54,8 +43,6 @@ public class DigiUserServiceImpl implements DigiUserService {
     public DigiUserDTO update(DigiUserDTO digiUserDTO) {
         log.debug("Request to update DigiUser : {}", digiUserDTO);
         DigiUser digiUser = digiUserMapper.toEntity(digiUserDTO);
-        Long playerId = digiUserDTO.getPlayer().getId();
-        playerRepository.findById(playerId).ifPresent(digiUser::player);
         digiUser = digiUserRepository.save(digiUser);
         return digiUserMapper.toDto(digiUser);
     }

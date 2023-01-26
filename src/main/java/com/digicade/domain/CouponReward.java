@@ -43,12 +43,12 @@ public class CouponReward implements Serializable {
     private Set<CouponImage> couponImages = new HashSet<>();
 
     @OneToMany(mappedBy = "couponReward")
-    @JsonIgnoreProperties(value = { "player", "couponReward" }, allowSetters = true)
-    private Set<PlayerCouponReward> playerCouponRewards = new HashSet<>();
-
-    @OneToMany(mappedBy = "couponReward")
     @JsonIgnoreProperties(value = { "couponReward", "nftReward" }, allowSetters = true)
     private Set<DailyReward> dailyRewards = new HashSet<>();
+
+    @OneToMany(mappedBy = "couponReward")
+    @JsonIgnoreProperties(value = { "player", "couponReward" }, allowSetters = true)
+    private Set<PlayerCouponReward> playerCouponRewards = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -161,37 +161,6 @@ public class CouponReward implements Serializable {
         return this;
     }
 
-    public Set<PlayerCouponReward> getPlayerCouponRewards() {
-        return this.playerCouponRewards;
-    }
-
-    public void setPlayerCouponRewards(Set<PlayerCouponReward> playerCouponRewards) {
-        if (this.playerCouponRewards != null) {
-            this.playerCouponRewards.forEach(i -> i.setCouponReward(null));
-        }
-        if (playerCouponRewards != null) {
-            playerCouponRewards.forEach(i -> i.setCouponReward(this));
-        }
-        this.playerCouponRewards = playerCouponRewards;
-    }
-
-    public CouponReward playerCouponRewards(Set<PlayerCouponReward> playerCouponRewards) {
-        this.setPlayerCouponRewards(playerCouponRewards);
-        return this;
-    }
-
-    public CouponReward addPlayerCouponReward(PlayerCouponReward playerCouponReward) {
-        this.playerCouponRewards.add(playerCouponReward);
-        playerCouponReward.setCouponReward(this);
-        return this;
-    }
-
-    public CouponReward removePlayerCouponReward(PlayerCouponReward playerCouponReward) {
-        this.playerCouponRewards.remove(playerCouponReward);
-        playerCouponReward.setCouponReward(null);
-        return this;
-    }
-
     public Set<DailyReward> getDailyRewards() {
         return this.dailyRewards;
     }
@@ -220,6 +189,37 @@ public class CouponReward implements Serializable {
     public CouponReward removeDailyReward(DailyReward dailyReward) {
         this.dailyRewards.remove(dailyReward);
         dailyReward.setCouponReward(null);
+        return this;
+    }
+
+    public Set<PlayerCouponReward> getPlayerCouponRewards() {
+        return this.playerCouponRewards;
+    }
+
+    public void setPlayerCouponRewards(Set<PlayerCouponReward> playerCouponRewards) {
+        if (this.playerCouponRewards != null) {
+            this.playerCouponRewards.forEach(i -> i.setCouponReward(null));
+        }
+        if (playerCouponRewards != null) {
+            playerCouponRewards.forEach(i -> i.setCouponReward(this));
+        }
+        this.playerCouponRewards = playerCouponRewards;
+    }
+
+    public CouponReward playerCouponRewards(Set<PlayerCouponReward> playerCouponRewards) {
+        this.setPlayerCouponRewards(playerCouponRewards);
+        return this;
+    }
+
+    public CouponReward addPlayerCouponReward(PlayerCouponReward playerCouponReward) {
+        this.playerCouponRewards.add(playerCouponReward);
+        playerCouponReward.setCouponReward(this);
+        return this;
+    }
+
+    public CouponReward removePlayerCouponReward(PlayerCouponReward playerCouponReward) {
+        this.playerCouponRewards.remove(playerCouponReward);
+        playerCouponReward.setCouponReward(null);
         return this;
     }
 

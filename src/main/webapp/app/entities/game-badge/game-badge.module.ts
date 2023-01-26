@@ -8,11 +8,6 @@ import { GameBadgeRoutingModule } from './route/game-badge-routing.module';
 
 @NgModule({
   imports: [SharedModule, GameBadgeRoutingModule],
-  declarations: [
-    // GameBadgeComponent,
-    // GameBadgeDetailComponent,
-    // GameBadgeUpdateComponent,
-    // GameBadgeDeleteDialogComponent
-  ],
+  declarations: [GameBadgeComponent, GameBadgeDetailComponent, GameBadgeUpdateComponent, GameBadgeDeleteDialogComponent],
 })
 export class GameBadgeModule {}

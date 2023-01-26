@@ -99,7 +99,7 @@ class GameLevelResourceIT {
         assertThat(gameLevelList).hasSize(databaseSizeBeforeCreate + 1);
         GameLevel testGameLevel = gameLevelList.get(gameLevelList.size() - 1);
         assertThat(testGameLevel.getLevel()).isEqualTo(DEFAULT_LEVEL);
-        //        assertThat(testGameLevel.getScore()).isEqualTo(DEFAULT_SCORE);
+        assertThat(testGameLevel.getScore()).isEqualTo(DEFAULT_SCORE);
     }
 
     @Test
@@ -188,7 +188,7 @@ class GameLevelResourceIT {
         assertThat(gameLevelList).hasSize(databaseSizeBeforeUpdate);
         GameLevel testGameLevel = gameLevelList.get(gameLevelList.size() - 1);
         assertThat(testGameLevel.getLevel()).isEqualTo(UPDATED_LEVEL);
-        //        assertThat(testGameLevel.getScore()).isEqualTo(UPDATED_SCORE);
+        assertThat(testGameLevel.getScore()).isEqualTo(UPDATED_SCORE);
     }
 
     @Test
@@ -283,7 +283,7 @@ class GameLevelResourceIT {
         assertThat(gameLevelList).hasSize(databaseSizeBeforeUpdate);
         GameLevel testGameLevel = gameLevelList.get(gameLevelList.size() - 1);
         assertThat(testGameLevel.getLevel()).isEqualTo(UPDATED_LEVEL);
-        //        assertThat(testGameLevel.getScore()).isEqualTo(DEFAULT_SCORE);
+        assertThat(testGameLevel.getScore()).isEqualTo(DEFAULT_SCORE);
     }
 
     @Test
@@ -313,7 +313,7 @@ class GameLevelResourceIT {
         assertThat(gameLevelList).hasSize(databaseSizeBeforeUpdate);
         GameLevel testGameLevel = gameLevelList.get(gameLevelList.size() - 1);
         assertThat(testGameLevel.getLevel()).isEqualTo(UPDATED_LEVEL);
-        //        assertThat(testGameLevel.getScore()).isEqualTo(UPDATED_SCORE);
+        assertThat(testGameLevel.getScore()).isEqualTo(UPDATED_SCORE);
     }
 
     @Test

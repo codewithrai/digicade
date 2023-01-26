@@ -32,11 +32,11 @@ public class DailyReward implements Serializable {
     private Double amount;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "couponImages", "playerCouponRewards", "dailyRewards" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "couponImages", "dailyRewards", "playerCouponRewards" }, allowSetters = true)
     private CouponReward couponReward;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "playerNftRewards", "dailyRewards" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "dailyRewards", "playerNftRewards" }, allowSetters = true)
     private NftReward nftReward;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

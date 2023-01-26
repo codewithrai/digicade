@@ -1,10 +1,15 @@
 <div>
-  <div class="unauthenticated">
-    <h1>401</h1>
-    <h3>Unauthorized</h3>
-    <div class="error-message" *ngIf="errorMessage">
-      <span>{{ errorMessage }}</span>
+  <div class="row">
+    <div class="col-md-4">
+      <span class="hipster img-fluid rounded"></span>
     </div>
-    <button class="btn btn-primary" routerLink="/">Home Page</button>
+
+    <div class="col-md-8">
+      <h1>Error page!</h1>
+
+      <div *ngIf="errorMessage">
+        <div class="alert alert-danger">{{ errorMessage }}</div>
+      </div>
+    </div>
   </div>
 </div>

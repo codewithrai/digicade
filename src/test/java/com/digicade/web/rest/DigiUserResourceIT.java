@@ -7,7 +7,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.digicade.IntegrationTest;
 import com.digicade.domain.DigiUser;
-import com.digicade.domain.Player;
 import com.digicade.repository.DigiUserRepository;
 import com.digicade.service.dto.DigiUserDTO;
 import com.digicade.service.mapper.DigiUserMapper;
@@ -90,16 +89,6 @@ class DigiUserResourceIT {
             .dob(DEFAULT_DOB)
             .age(DEFAULT_AGE)
             .promoCode(DEFAULT_PROMO_CODE);
-        // Add required entity
-        Player player;
-        if (TestUtil.findAll(em, Player.class).isEmpty()) {
-            player = PlayerResourceIT.createEntity(em);
-            em.persist(player);
-            em.flush();
-        } else {
-            player = TestUtil.findAll(em, Player.class).get(0);
-        }
-        digiUser.setPlayer(player);
         return digiUser;
     }
 
@@ -118,12 +107,6 @@ class DigiUserResourceIT {
             .dob(UPDATED_DOB)
             .age(UPDATED_AGE)
             .promoCode(UPDATED_PROMO_CODE);
-        // Add required entity
-        Player player;
-        player = PlayerResourceIT.createUpdatedEntity(em);
-        em.persist(player);
-        em.flush();
-        digiUser.setPlayer(player);
         return digiUser;
     }
 
@@ -153,9 +136,6 @@ class DigiUserResourceIT {
         assertThat(testDigiUser.getDob()).isEqualTo(DEFAULT_DOB);
         assertThat(testDigiUser.getAge()).isEqualTo(DEFAULT_AGE);
         assertThat(testDigiUser.getPromoCode()).isEqualTo(DEFAULT_PROMO_CODE);
-
-        // Validate the id for MapsId, the ids must be same
-        assertThat(testDigiUser.getId()).isEqualTo(digiUserDTO.getPlayer().getId());
     }
 
     @Test
@@ -175,47 +155,6 @@ class DigiUserResourceIT {
         // Validate the DigiUser in the database
         List<DigiUser> digiUserList = digiUserRepository.findAll();
         assertThat(digiUserList).hasSize(databaseSizeBeforeCreate);
-    }
-
-    @Test
-    @Transactional
-    void updateDigiUserMapsIdAssociationWithNewId() throws Exception {
-        // Initialize the database
-        digiUserRepository.saveAndFlush(digiUser);
-        int databaseSizeBeforeCreate = digiUserRepository.findAll().size();
-        // Add a new parent entity
-        Player player = PlayerResourceIT.createUpdatedEntity(em);
-        em.persist(player);
-        em.flush();
-
-        // Load the digiUser
-        DigiUser updatedDigiUser = digiUserRepository.findById(digiUser.getId()).get();
-        assertThat(updatedDigiUser).isNotNull();
-        // Disconnect from session so that the updates on updatedDigiUser are not directly saved in db
-        em.detach(updatedDigiUser);
-
-        // Update the Player with new association value
-        updatedDigiUser.setPlayer(player);
-        DigiUserDTO updatedDigiUserDTO = digiUserMapper.toDto(updatedDigiUser);
-        assertThat(updatedDigiUserDTO).isNotNull();
-
-        // Update the entity
-        restDigiUserMockMvc
-            .perform(
-                put(ENTITY_API_URL_ID, updatedDigiUserDTO.getId())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(updatedDigiUserDTO))
-            )
-            .andExpect(status().isOk());
-
-        // Validate the DigiUser in the database
-        List<DigiUser> digiUserList = digiUserRepository.findAll();
-        assertThat(digiUserList).hasSize(databaseSizeBeforeCreate);
-        DigiUser testDigiUser = digiUserList.get(digiUserList.size() - 1);
-        // Validate the id for MapsId, the ids must be same
-        // Uncomment the following line for assertion. However, please note that there is a known issue and uncommenting will fail the test.
-        // Please look at https://github.com/jhipster/generator-jhipster/issues/9100. You can modify this test as necessary.
-        // assertThat(testDigiUser.getId()).isEqualTo(testDigiUser.getPlayer().getId());
     }
 
     @Test

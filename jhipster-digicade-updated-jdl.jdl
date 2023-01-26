@@ -1,0 +1,142 @@
+application {
+	config {
+    	applicationType monolith
+        authenticationType jwt
+        baseName digicade
+        blueprints []
+        buildTool maven
+        cacheProvider ehcache
+        clientFramework angularX
+        clientPackageManager npm
+        clientTheme darkly
+        clientThemeVariant dark
+        devDatabaseType h2Memory
+        dtoSuffix DTO
+        enableHibernateCache false
+        enableSwaggerCodegen false
+        enableTranslation false
+        jhiPrefix jhi
+        languages [en, fr]
+        messageBroker false
+        nativeLanguage en
+        packageName com.digicade
+        prodDatabaseType postgresql
+        reactive false
+        searchEngine false
+        serverPort 8080
+        serviceDiscoveryType no
+        skipClient false
+    }
+    entities *
+}
+entity CoinPackage {
+  coins Integer
+  cost Double
+}
+entity CouponImage {
+  imageUrl String
+}
+entity CouponReward {
+  description String
+  location String
+  tix Integer
+  comp Integer
+  expiry LocalDate
+}
+entity DailyReward {
+  time String
+  rewardType RewardType
+  amount Double
+}
+entity DigiUser {
+  firstName String
+  lastName String
+  userName String
+  email String
+  dob LocalDate
+  age Integer
+  promoCode String
+}
+entity Game {
+  url String
+  logoUrl String
+}
+entity GameBadge {
+  logoUrl String
+}
+entity PlayerGameBadge {
+
+}
+entity GameLevel {
+  level Integer
+  score Integer
+}
+entity GameScore {
+  score Integer
+  date LocalDate
+}
+entity HighScore {
+  highestScore Integer
+}
+entity NftReward {
+  tix Integer
+  comp Integer
+  imageUrl String
+}
+entity Player {
+  gamePlayCredits Integer
+  tix Integer
+  comp Integer
+  level Integer
+  walletAddress String
+}
+entity PlayerCouponReward {
+  date LocalDate
+  status CouponStatus
+}
+entity PlayerNftReward {
+  date LocalDate
+}
+entity Transaction {
+  date LocalDate
+}
+enum RewardType {
+  TIX,
+  COMP,
+  CREDITS,
+  NFT,
+  COUPON
+}
+enum CouponStatus {
+  REDEEMED,
+  REFUNDED
+}
+
+relationship OneToOne {
+  DigiUser{player} to Player{digiUser}
+}
+relationship OneToMany {
+  CouponReward{couponImage} to CouponImage{couponReward}
+  CouponReward{dailyReward} to DailyReward{couponReward}
+  NftReward{dailyReward} to DailyReward{nftReward}
+  Game{gameBadge} to GameBadge{game}
+  Player{gameBadge} to GameBadge{player}
+  GameBadge{playerGameBadge} to PlayerGameBadge{gameBadge}
+  Player{playerGameBadge} to PlayerGameBadge{player}
+  Player{gameLevel} to GameLevel{player}
+  Game{gameLevel} to GameLevel{game}
+  Game{gameScore} to GameScore{game}
+  Player{gameScore} to GameScore{player}
+  Game{highScore} to HighScore{game}
+  Player{highScore} to HighScore{player}
+  Player{playerCouponReward} to PlayerCouponReward{player}
+  CouponReward{playerCouponReward} to PlayerCouponReward{couponReward}
+  Player{playerNftReward} to PlayerNftReward{player}
+  NftReward{playerNftReward} to PlayerNftReward{nftReward}
+  Player{transaction} to Transaction{player}
+  CoinPackage{transaction} to Transaction{coinPackage}
+}
+
+dto * with mapstruct
+paginate * with pagination
+service * with serviceImpl

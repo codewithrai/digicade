@@ -1,8 +1,6 @@
 package com.digicade.repository;
 
 import com.digicade.domain.User;
-import com.digicade.service.dto.UserDTO;
-import com.digicade.service.dto.UserProfileDTO;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
@@ -10,8 +8,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -37,15 +33,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findOneWithAuthoritiesByEmailIgnoreCase(String email);
 
     Page<User> findAllByIdNotNullAndActivatedIsTrue(Pageable pageable);
-
-    @Query(
-        "SELECT new com.digicade.service.dto.UserProfileDTO(user.firstName, user.lastName, " +
-        "user.login, '', user.email, '', user.imageUrl, gameLevel.xp," +
-        " user.player.tix, user.player.comp, user.player.gamePlayCredits) " +
-        "from User user inner join GameLevel gameLevel on gameLevel.player.id = user.player.id " +
-        "where user.id = :userId"
-    )
-    Optional<UserProfileDTO> findUserProfileByUserI(@Param("userId") Long userId);
-
-    Optional<User> findUserByLogin(String login);
 }

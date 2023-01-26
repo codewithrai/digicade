@@ -6,7 +6,6 @@ import { INftReward } from '../nft-reward.model';
 @Component({
   selector: 'jhi-nft-reward-detail',
   templateUrl: './nft-reward-detail.component.html',
-  styleUrls: ['./nft-reward-detail.component.css'],
 })
 export class NftRewardDetailComponent implements OnInit {
   nftReward: INftReward | null = null;

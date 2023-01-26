@@ -184,11 +184,4 @@ public class PlayerCouponRewardResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
     }
-
-    @GetMapping("/player-coupon-rewards/coupon/{playerId}")
-    public ResponseEntity<PlayerCouponRewardDTO> getPlayerCouponRewardByPlayerId(@PathVariable Long playerId) throws Exception {
-        PlayerCouponRewardDTO playerCouponRewardDTO = playerCouponRewardService.getPlayerCouponRewardByPlayerId(playerId);
-
-        return ResponseEntity.ok(playerCouponRewardDTO);
-    }
 }

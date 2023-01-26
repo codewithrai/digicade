@@ -23,46 +23,6 @@ import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ErrorComponent } from './layouts/error/error.component';
-import { AppComponent } from './app/app.component';
-import { HeaderComponent } from './layouts/header/header.component';
-import { AppFooterComponent } from './app-footer/app-footer.component';
-import { AppLoginComponent } from './app-login/app-login.component';
-import { AppRegisterComponent } from './app-register/app-register.component';
-import { AppCarouselComponent } from './app-carousel/app-carousel.component';
-import { CarouselModule } from 'ngx-owl-carousel-o';
-import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AdminPanelComponent } from './admin-panel/admin-panel.component';
-import { SidebarComponent } from './layouts/sidebar/sidebar.component';
-import { PlayerComponent } from './entities/player/list/player.component';
-import { PlayerDetailComponent } from './entities/player/detail/player-detail.component';
-import { PlayerUpdateComponent } from './entities/player/update/player-update.component';
-import { PlayerDeleteDialogComponent } from './entities/player/delete/player-delete-dialog.component';
-import { UserComponent } from './entities/jhi-user/list/user.component';
-import { UserDetailComponent } from './entities/jhi-user/detail/user-detail.component';
-import { UserUpdateComponent } from './entities/jhi-user/update/user-update.component';
-import { GameComponent } from './entities/game/list/game.component';
-import { GameDetailComponent } from './entities/game/detail/game-detail.component';
-import { GameUpdateComponent } from './entities/game/update/game-update.component';
-import { UserDeleteComponent } from './entities/jhi-user/delete/user-delete.component';
-import { NotFoundComponent } from './layouts/error/not-found.component';
-import { GamesComponent } from './games/games.component';
-import { GameBadgeComponent } from './entities/game-badge/list/game-badge.component';
-import { GameBadgeDetailComponent } from './entities/game-badge/detail/game-badge-detail.component';
-import { GameBadgeUpdateComponent } from './entities/game-badge/update/game-badge-update.component';
-import { GameBadgeDeleteDialogComponent } from './entities/game-badge/delete/game-badge-delete-dialog.component';
-import { CouponRewardComponent } from './entities/coupon-reward/list/coupon-reward.component';
-import { CouponRewardDetailComponent } from './entities/coupon-reward/detail/coupon-reward-detail.component';
-import { CouponRewardUpdateComponent } from './entities/coupon-reward/update/coupon-reward-update.component';
-import { CouponRewardDeleteDialogComponent } from './entities/coupon-reward/delete/coupon-reward-delete-dialog.component';
-import { DailyRewardComponent } from './entities/daily-reward/list/daily-reward.component';
-import { DailyRewardDetailComponent } from './entities/daily-reward/detail/daily-reward-detail.component';
-import { DailyRewardUpdateComponent } from './entities/daily-reward/update/daily-reward-update.component';
-import { DailyRewardDeleteDialogComponent } from './entities/daily-reward/delete/daily-reward-delete-dialog.component';
-import { NftRewardComponent } from './entities/nft-reward/list/nft-reward.component';
-import { NftRewardDetailComponent } from './entities/nft-reward/detail/nft-reward-detail.component';
-import { NftRewardUpdateComponent } from './entities/nft-reward/update/nft-reward-update.component';
-import { NftRewardDeleteDialogComponent } from './entities/nft-reward/delete/nft-reward-delete-dialog.component';
 
 @NgModule({
   imports: [
@@ -75,88 +35,15 @@ import { NftRewardDeleteDialogComponent } from './entities/nft-reward/delete/nft
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
     HttpClientModule,
     NgxWebstorageModule.forRoot({ prefix: 'jhi', separator: '-', caseSensitive: true }),
-    BrowserAnimationsModule,
-    CarouselModule,
-    SocialLoginModule,
   ],
   providers: [
     Title,
     { provide: LOCALE_ID, useValue: 'en' },
     { provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter },
     httpInterceptorProviders,
-    {
-      provide: 'SocialAuthServiceConfig',
-      useValue: {
-        autoLogin: false,
-        providers: [
-          {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider('773632708179-psoan60e5kvdiiv5k29gj42u9hf29l18.apps.googleusercontent.com'),
-          },
-          {
-            id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('501032318451653'),
-          },
-        ],
-        onError: err => {
-          console.error(err);
-        },
-      } as SocialAuthServiceConfig,
-    },
   ],
-  declarations: [
-    MainComponent,
-    NavbarComponent,
-    ErrorComponent,
-    NotFoundComponent,
-    PageRibbonComponent,
-    FooterComponent,
-    AppComponent,
-    HeaderComponent,
-    AppFooterComponent,
-    AppLoginComponent,
-    AppRegisterComponent,
-    AppCarouselComponent,
-    AdminPanelComponent,
-    SidebarComponent,
-
-    PlayerComponent,
-    PlayerDetailComponent,
-    PlayerUpdateComponent,
-    PlayerDeleteDialogComponent,
-
-    UserComponent,
-    UserDetailComponent,
-    UserUpdateComponent,
-    UserDeleteComponent,
-
-    GameComponent,
-    GameDetailComponent,
-    GameUpdateComponent,
-    GamesComponent,
-
-    GameBadgeComponent,
-    GameBadgeDetailComponent,
-    GameBadgeUpdateComponent,
-    GameBadgeDeleteDialogComponent,
-
-    CouponRewardComponent,
-    CouponRewardDetailComponent,
-    CouponRewardUpdateComponent,
-    CouponRewardDeleteDialogComponent,
-
-    DailyRewardComponent,
-    DailyRewardDetailComponent,
-    DailyRewardUpdateComponent,
-    DailyRewardDeleteDialogComponent,
-
-    NftRewardComponent,
-    NftRewardDetailComponent,
-    NftRewardUpdateComponent,
-    NftRewardDeleteDialogComponent,
-  ],
+  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],
   bootstrap: [MainComponent],
-  exports: [NavbarComponent, SidebarComponent],
 })
 export class AppModule {
   constructor(applicationConfigService: ApplicationConfigService, iconLibrary: FaIconLibrary, dpConfig: NgbDatepickerConfig) {
