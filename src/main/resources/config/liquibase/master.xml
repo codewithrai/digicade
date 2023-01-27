@@ -32,6 +32,7 @@
     <include file="config/liquibase/changelog/20221221095524_added_entity_NftReward.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20221221095525_added_entity_PlayerNftReward.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20221221095526_added_entity_DailyReward.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230126083057_added_entity_PlayerGameBadge.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20221221095512_added_entity_constraints_DigiUser.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20221221095514_added_entity_constraints_GameBadge.xml" relativeToChangelogFile="false"/>
@@ -43,6 +44,7 @@
     <include file="config/liquibase/changelog/20221221095523_added_entity_constraints_PlayerCouponReward.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20221221095525_added_entity_constraints_PlayerNftReward.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20221221095526_added_entity_constraints_DailyReward.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230126083057_added_entity_constraints_PlayerGameBadge.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>
