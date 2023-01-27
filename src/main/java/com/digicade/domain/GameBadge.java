@@ -31,15 +31,6 @@ public class GameBadge implements Serializable {
     @JsonIgnoreProperties(value = { "gameScores", "highScores", "gameBadges", "gameLevels" }, allowSetters = true)
     private Game game;
 
-    @ManyToOne
-    @JsonIgnoreProperties(
-        value = {
-            "gameScores", "highScores", "gameLevels", "gameBadges", "transactions", "playerCouponRewards", "playerNftRewards", "digiUser",
-        },
-        allowSetters = true
-    )
-    private Player player;
-
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -86,19 +77,6 @@ public class GameBadge implements Serializable {
 
     public GameBadge game(Game game) {
         this.setGame(game);
-        return this;
-    }
-
-    public Player getPlayer() {
-        return this.player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
-    public GameBadge player(Player player) {
-        this.setPlayer(player);
         return this;
     }
 

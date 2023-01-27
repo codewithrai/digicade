@@ -355,7 +355,7 @@ public class UserService {
 
         Long playerId = player.getId();
 
-        Set<GameBadge> badges = gameBadgeRepository.findGameBadgeByPlayerId(playerId);
+        Set<GameBadge> badges = gameBadgeRepository.findGameBadgeByGameId(playerId);
 
         profile.setGameBadges(badges);
 

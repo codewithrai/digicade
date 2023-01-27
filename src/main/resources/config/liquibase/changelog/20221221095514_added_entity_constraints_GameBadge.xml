@@ -13,11 +13,5 @@
                                  constraintName="fk_game_badge__game_id"
                                  referencedColumnNames="id"
                                  referencedTableName="game"/>
-
-        <addForeignKeyConstraint baseColumnNames="player_id"
-                                 baseTableName="game_badge"
-                                 constraintName="fk_game_badge__player_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="player"/>
     </changeSet>
 </databaseChangeLog>

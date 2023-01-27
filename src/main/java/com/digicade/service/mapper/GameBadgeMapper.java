@@ -14,7 +14,6 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring")
 public interface GameBadgeMapper extends EntityMapper<GameBadgeDTO, GameBadge> {
     @Mapping(target = "game", source = "game", qualifiedByName = "gameId")
-    @Mapping(target = "player", source = "player", qualifiedByName = "playerId")
     GameBadgeDTO toDto(GameBadge s);
 
     @Named("gameId")
