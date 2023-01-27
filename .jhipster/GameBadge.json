@@ -27,12 +27,6 @@
       "otherEntityRelationshipName": "gameBadge",
       "relationshipName": "game",
       "relationshipType": "many-to-one"
-    },
-    {
-      "otherEntityName": "player",
-      "otherEntityRelationshipName": "gameBadge",
-      "relationshipName": "player",
-      "relationshipType": "many-to-one"
     }
   ],
   "service": "serviceImpl"

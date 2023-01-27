@@ -20,7 +20,6 @@ type GameBadgeFormGroupContent = {
   id: FormControl<IGameBadge['id'] | NewGameBadge['id']>;
   logoUrl: FormControl<IGameBadge['logoUrl']>;
   game: FormControl<IGameBadge['game']>;
-  player: FormControl<IGameBadge['player']>;
 };
 
 export type GameBadgeFormGroup = FormGroup<GameBadgeFormGroupContent>;
@@ -42,7 +41,6 @@ export class GameBadgeFormService {
       ),
       logoUrl: new FormControl(gameBadgeRawValue.logoUrl),
       game: new FormControl(gameBadgeRawValue.game),
-      player: new FormControl(gameBadgeRawValue.player),
     });
   }
 

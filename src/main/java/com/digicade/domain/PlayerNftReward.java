@@ -27,7 +27,6 @@ public class PlayerNftReward implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties(
         value = {
-            "gameBadges",
             "playerGameBadges",
             "gameLevels",
             "gameScores",

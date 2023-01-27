@@ -22,7 +22,6 @@ describe('GameBadge Form Service', () => {
             id: expect.any(Object),
             logoUrl: expect.any(Object),
             game: expect.any(Object),
-            player: expect.any(Object),
           })
         );
       });
@@ -35,7 +34,6 @@ describe('GameBadge Form Service', () => {
             id: expect.any(Object),
             logoUrl: expect.any(Object),
             game: expect.any(Object),
-            player: expect.any(Object),
           })
         );
       });

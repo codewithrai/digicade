@@ -21,13 +21,12 @@ public class PlayerGameBadge implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "playerGameBadges", "game", "player" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "playerGameBadges", "game" }, allowSetters = true)
     private GameBadge gameBadge;
 
     @ManyToOne
     @JsonIgnoreProperties(
         value = {
-            "gameBadges",
             "playerGameBadges",
             "gameLevels",
             "gameScores",

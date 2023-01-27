@@ -15,8 +15,6 @@ public class GameBadgeDTO implements Serializable {
 
     private GameDTO game;
 
-    private PlayerDTO player;
-
     public Long getId() {
         return id;
     }
@@ -39,14 +37,6 @@ public class GameBadgeDTO implements Serializable {
 
     public void setGame(GameDTO game) {
         this.game = game;
-    }
-
-    public PlayerDTO getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(PlayerDTO player) {
-        this.player = player;
     }
 
     @Override
@@ -77,7 +67,6 @@ public class GameBadgeDTO implements Serializable {
             "id=" + getId() +
             ", logoUrl='" + getLogoUrl() + "'" +
             ", game=" + getGame() +
-            ", player=" + getPlayer() +
             "}";
     }
 }

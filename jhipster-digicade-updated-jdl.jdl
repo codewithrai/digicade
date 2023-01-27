@@ -120,7 +120,6 @@ relationship OneToMany {
   CouponReward{dailyReward} to DailyReward{couponReward}
   NftReward{dailyReward} to DailyReward{nftReward}
   Game{gameBadge} to GameBadge{game}
-  Player{gameBadge} to GameBadge{player}
   GameBadge{playerGameBadge} to PlayerGameBadge{gameBadge}
   Player{playerGameBadge} to PlayerGameBadge{player}
   Player{gameLevel} to GameLevel{player}

@@ -29,7 +29,6 @@ public class GameLevel implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties(
         value = {
-            "gameBadges",
             "playerGameBadges",
             "gameLevels",
             "gameScores",

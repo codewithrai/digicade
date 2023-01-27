@@ -44,7 +44,6 @@ public class DigiUser implements Serializable {
 
     @JsonIgnoreProperties(
         value = {
-            "gameBadges",
             "playerGameBadges",
             "gameLevels",
             "gameScores",

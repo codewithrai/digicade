@@ -33,12 +33,6 @@
   "readOnly": false,
   "relationships": [
     {
-      "otherEntityName": "gameBadge",
-      "otherEntityRelationshipName": "player",
-      "relationshipName": "gameBadge",
-      "relationshipType": "one-to-many"
-    },
-    {
       "otherEntityName": "playerGameBadge",
       "otherEntityRelationshipName": "player",
       "relationshipName": "playerGameBadge",

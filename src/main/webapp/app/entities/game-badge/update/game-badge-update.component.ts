@@ -9,8 +9,6 @@ import { IGameBadge } from '../game-badge.model';
 import { GameBadgeService } from '../service/game-badge.service';
 import { IGame } from 'app/entities/game/game.model';
 import { GameService } from 'app/entities/game/service/game.service';
-import { IPlayer } from 'app/entities/player/player.model';
-import { PlayerService } from 'app/entities/player/service/player.service';
 
 @Component({
   selector: 'jhi-game-badge-update',
@@ -21,7 +19,6 @@ export class GameBadgeUpdateComponent implements OnInit {
   gameBadge: IGameBadge | null = null;
 
   gamesSharedCollection: IGame[] = [];
-  playersSharedCollection: IPlayer[] = [];
 
   editForm: GameBadgeFormGroup = this.gameBadgeFormService.createGameBadgeFormGroup();
 
@@ -29,13 +26,10 @@ export class GameBadgeUpdateComponent implements OnInit {
     protected gameBadgeService: GameBadgeService,
     protected gameBadgeFormService: GameBadgeFormService,
     protected gameService: GameService,
-    protected playerService: PlayerService,
     protected activatedRoute: ActivatedRoute
   ) {}
 
   compareGame = (o1: IGame | null, o2: IGame | null): boolean => this.gameService.compareGame(o1, o2);
-
-  comparePlayer = (o1: IPlayer | null, o2: IPlayer | null): boolean => this.playerService.comparePlayer(o1, o2);
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ gameBadge }) => {
@@ -86,10 +80,6 @@ export class GameBadgeUpdateComponent implements OnInit {
     this.gameBadgeFormService.resetForm(this.editForm, gameBadge);
 
     this.gamesSharedCollection = this.gameService.addGameToCollectionIfMissing<IGame>(this.gamesSharedCollection, gameBadge.game);
-    this.playersSharedCollection = this.playerService.addPlayerToCollectionIfMissing<IPlayer>(
-      this.playersSharedCollection,
-      gameBadge.player
-    );
   }
 
   protected loadRelationshipsOptions(): void {
@@ -98,11 +88,5 @@ export class GameBadgeUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IGame[]>) => res.body ?? []))
       .pipe(map((games: IGame[]) => this.gameService.addGameToCollectionIfMissing<IGame>(games, this.gameBadge?.game)))
       .subscribe((games: IGame[]) => (this.gamesSharedCollection = games));
-
-    this.playerService
-      .query()
-      .pipe(map((res: HttpResponse<IPlayer[]>) => res.body ?? []))
-      .pipe(map((players: IPlayer[]) => this.playerService.addPlayerToCollectionIfMissing<IPlayer>(players, this.gameBadge?.player)))
-      .subscribe((players: IPlayer[]) => (this.playersSharedCollection = players));
   }
 }

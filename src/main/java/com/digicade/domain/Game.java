@@ -29,7 +29,7 @@ public class Game implements Serializable {
     private String logoUrl;
 
     @OneToMany(mappedBy = "game")
-    @JsonIgnoreProperties(value = { "playerGameBadges", "game", "player" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "playerGameBadges", "game" }, allowSetters = true)
     private Set<GameBadge> gameBadges = new HashSet<>();
 
     @OneToMany(mappedBy = "game")

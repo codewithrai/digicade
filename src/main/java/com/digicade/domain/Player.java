@@ -38,10 +38,6 @@ public class Player implements Serializable {
     private String walletAddress;
 
     @OneToMany(mappedBy = "player")
-    @JsonIgnoreProperties(value = { "playerGameBadges", "game", "player" }, allowSetters = true)
-    private Set<GameBadge> gameBadges = new HashSet<>();
-
-    @OneToMany(mappedBy = "player")
     @JsonIgnoreProperties(value = { "gameBadge", "player" }, allowSetters = true)
     private Set<PlayerGameBadge> playerGameBadges = new HashSet<>();
 
@@ -151,37 +147,6 @@ public class Player implements Serializable {
 
     public void setWalletAddress(String walletAddress) {
         this.walletAddress = walletAddress;
-    }
-
-    public Set<GameBadge> getGameBadges() {
-        return this.gameBadges;
-    }
-
-    public void setGameBadges(Set<GameBadge> gameBadges) {
-        if (this.gameBadges != null) {
-            this.gameBadges.forEach(i -> i.setPlayer(null));
-        }
-        if (gameBadges != null) {
-            gameBadges.forEach(i -> i.setPlayer(this));
-        }
-        this.gameBadges = gameBadges;
-    }
-
-    public Player gameBadges(Set<GameBadge> gameBadges) {
-        this.setGameBadges(gameBadges);
-        return this;
-    }
-
-    public Player addGameBadge(GameBadge gameBadge) {
-        this.gameBadges.add(gameBadge);
-        gameBadge.setPlayer(this);
-        return this;
-    }
-
-    public Player removeGameBadge(GameBadge gameBadge) {
-        this.gameBadges.remove(gameBadge);
-        gameBadge.setPlayer(null);
-        return this;
     }
 
     public Set<PlayerGameBadge> getPlayerGameBadges() {
