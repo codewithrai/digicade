@@ -1,7 +1,9 @@
 package com.digicade.service.dto;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Objects;
+import javax.persistence.Column;
 
 /**
  * A DTO for the {@link com.digicade.domain.PlayerGameBadge} entity.
@@ -10,6 +12,8 @@ import java.util.Objects;
 public class PlayerGameBadgeDTO implements Serializable {
 
     private Long id;
+
+    private LocalDate date;
 
     private GameBadgeDTO gameBadge;
 
@@ -21,6 +25,14 @@ public class PlayerGameBadgeDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public GameBadgeDTO getGameBadge() {

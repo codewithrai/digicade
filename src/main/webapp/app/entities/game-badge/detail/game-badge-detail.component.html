@@ -30,12 +30,6 @@
                 <a [routerLink]="['/game', gameBadge.game.id, 'view']">{{ gameBadge.game.id }}</a>
               </div>
             </dd>
-            <dt><span>Player</span></dt>
-            <dd>
-              <div *ngIf="gameBadge.player">
-                <a [routerLink]="['/player', gameBadge.player.id, 'view']">{{ gameBadge.player.id }}</a>
-              </div>
-            </dd>
           </dl>
 
           <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

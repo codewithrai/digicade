@@ -5,6 +5,7 @@ import com.digicade.repository.PlayerGameBadgeRepository;
 import com.digicade.service.PlayerGameBadgeService;
 import com.digicade.service.dto.PlayerGameBadgeDTO;
 import com.digicade.service.mapper.PlayerGameBadgeMapper;
+import java.time.LocalDate;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,7 @@ public class PlayerGameBadgeServiceImpl implements PlayerGameBadgeService {
     @Override
     public PlayerGameBadgeDTO save(PlayerGameBadgeDTO playerGameBadgeDTO) {
         log.debug("Request to save PlayerGameBadge : {}", playerGameBadgeDTO);
+        playerGameBadgeDTO.setDate(LocalDate.now());
         PlayerGameBadge playerGameBadge = playerGameBadgeMapper.toEntity(playerGameBadgeDTO);
         playerGameBadge = playerGameBadgeRepository.save(playerGameBadge);
         return playerGameBadgeMapper.toDto(playerGameBadge);

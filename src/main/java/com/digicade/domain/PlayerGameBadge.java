@@ -2,6 +2,7 @@ package com.digicade.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.time.LocalDate;
 import javax.persistence.*;
 
 /**
@@ -19,6 +20,9 @@ public class PlayerGameBadge implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     @Column(name = "id")
     private Long id;
+
+    @Column(name = "date")
+    private LocalDate date;
 
     @ManyToOne
     @JsonIgnoreProperties(value = { "playerGameBadges", "game", "player" }, allowSetters = true)
@@ -54,6 +58,14 @@ public class PlayerGameBadge implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public GameBadge getGameBadge() {

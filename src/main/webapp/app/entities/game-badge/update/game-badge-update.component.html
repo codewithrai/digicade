@@ -34,21 +34,6 @@
                 <option [ngValue]="gameOption" *ngFor="let gameOption of gamesSharedCollection">{{ gameOption.id }}</option>
               </select>
             </div>
-
-            <div class="row mb-3">
-              <label class="form-label" for="field_player">Player</label>
-              <select
-                class="form-control"
-                id="field_player"
-                data-cy="player"
-                name="player"
-                formControlName="player"
-                [compareWith]="comparePlayer"
-              >
-                <option [ngValue]="null"></option>
-                <option [ngValue]="playerOption" *ngFor="let playerOption of playersSharedCollection">{{ playerOption.id }}</option>
-              </select>
-            </div>
           </div>
 
           <div>
